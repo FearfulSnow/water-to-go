@@ -15,17 +15,19 @@ public class Game
 
     private void createRooms()
     {
-        Room outside, theatre, pub, lab, office;
+        Room outside, theatre, pub, lab, office, secretRoom;
       
         outside = new Room("outside the main entrance of the university");
         theatre = new Room("in a lecture theatre");
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
+        secretRoom = new Room("in a super secret room! Shh");
         
         outside.setExit("east", theatre);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
+        outside.setExit("secret", secretRoom);
 
         theatre.setExit("west", outside);
 
@@ -35,6 +37,8 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
+
+        secretRoom.setExit("out", outside);
 
         currentRoom = outside;
     }
@@ -49,7 +53,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing. Goodbye.");
     }
 
     private void printWelcome()
@@ -75,7 +79,7 @@ public class Game
             }
             case HELP -> printHelp();
             case GO -> goRoom(command);
-            case INV -> System.out.println("Your inventory contains X");
+            case INVENTORY -> System.out.println("Your inventory contains the following items");
             case QUIT -> wantToQuit = quit(command);
         }
 
@@ -84,9 +88,7 @@ public class Game
 
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
-        System.out.println();
+        System.out.println("You are lost. You are alone. You wander around at the university.\n");
         System.out.println("Your command words are:");
         parser.showCommands();
     }
