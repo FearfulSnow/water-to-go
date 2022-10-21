@@ -68,20 +68,17 @@ public class Game
 
         CommandWord commandWord = command.getCommandWord();
 
-        if(commandWord == CommandWord.UNKNOWN) {
-            System.out.println("I don't know what you mean...");
-            return false;
+        switch (commandWord) {
+            case UNKNOWN -> {
+                System.out.println("I don't know what you mean...");
+                return false;
+            }
+            case HELP -> printHelp();
+            case GO -> goRoom(command);
+            case INV -> System.out.println("Your inventory contains X");
+            case QUIT -> wantToQuit = quit(command);
         }
 
-        if (commandWord == CommandWord.HELP) {
-            printHelp();
-        }
-        else if (commandWord == CommandWord.GO) {
-            goRoom(command);
-        }
-        else if (commandWord == CommandWord.QUIT) {
-            wantToQuit = quit(command);
-        }
         return wantToQuit;
     }
 
