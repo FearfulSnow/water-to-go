@@ -1,6 +1,8 @@
 package worldofzuul;
 
-public class Game 
+import java.util.HashMap;
+
+public class Game
 {
     private Parser parser;
     private Room currentRoom;
@@ -22,12 +24,16 @@ public class Game
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
-        secretRoom = new Room("in a super secret room! Shh");
-        
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
-        outside.setExit("secret", secretRoom);
+        secretRoom = new Room("in a super secret room! Shh", new HashMap<>() {{
+            put("out", outside);
+        }});
+
+        outside.setExits(new HashMap<>() {{
+            put("east", theatre);
+            put("south", lab);
+            put("west", pub);
+            put("secret", secretRoom);
+        }});
 
         theatre.setExit("west", outside);
 
@@ -37,8 +43,6 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
-
-        secretRoom.setExit("out", outside);
 
         currentRoom = outside;
     }
