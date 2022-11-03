@@ -4,14 +4,16 @@ import java.util.HashMap;
 
 public class Game
 {
-    private Parser parser;
+    private final Parser parser;
     private Room currentRoom;
+    public Inventory inventory;
         
 
     public Game() 
     {
         createRooms();
         parser = new Parser();
+        inventory = new Inventory(100);
     }
 
 
@@ -83,7 +85,22 @@ public class Game
             }
             case HELP -> printHelp();
             case GO -> goRoom(command);
-            case INVENTORY -> System.out.println("Your inventory contains the following items");
+            case INVENTORY -> {
+                if (inventory.getItems().isEmpty()) {
+                    System.out.println("Your inventory is empty.");
+                } else {
+                    System.out.println("Your inventory contains the following items:");
+                    inventory.itemsToString();
+                }
+            }
+            case GIVE -> {
+                // For testing purposes
+                if (command.hasSecondWord()) {
+                    inventory.addItem(command.getSecondWord(), 1);
+                } else {
+                    System.out.println("Missing 2nd argument");
+                }
+            }
             case QUIT -> wantToQuit = quit(command);
         }
 

@@ -32,6 +32,12 @@ public class Inventory {
     return items;
   }
 
+  public void itemsToString() {
+    for (Item item : items) {
+      System.out.printf("%dx %s\n", item.getQuantity(), item.getName());
+    }
+  }
+
   public void addItem(String name, int quantity) {
     Item item = this.getItem(name);
     if (item == null) {
@@ -40,23 +46,29 @@ public class Inventory {
     } else {
       this.getItem(name).setQuantity(item.getQuantity() + quantity);
     }
-//    Item existingItem = this.getItem(item.getName());
-//    if (existingItem == null) {
-//      this.items.add(item);
-//    } else {
-//      this.getItem(item.getName()).setQuantity(existingItem.getQuantity() + item.getQuantity());
-//    }
+  }
+
+  public void removeItem(String name, int quantity) {
+    Item item = this.getItem(name);
+    if (item == null) {
+      System.out.println("Item " + name + " does not exist in inventory");
+      return;
+    }
+    this.getItem(name).setQuantity(item.getQuantity() - quantity);
+    if (this.getItem(name).getQuantity() <= 0) {
+      this.items.remove(this.getItem(name));
+    }
   }
 
   public void setItems(List<Item> items) {
     this.items = items;
   }
 
-  public static void main(String[] args) {
-    Item rock = new Item("Rock", 1);
-    Inventory inventory = new Inventory(100);
-    inventory.addItem(rock.getName(), rock.getQuantity());
-
-    System.out.println(inventory.getItem("Rock").toString());
-  }
+//  public static void main(String[] args) {
+//    Item rock = new Item("Rock", 1);
+//    Inventory inventory = new Inventory(100);
+//    inventory.addItem(rock.getName(), rock.getQuantity());
+//
+//    System.out.println(inventory.getItem("Rock").toString());
+//  }
 }
