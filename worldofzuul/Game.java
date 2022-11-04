@@ -1,6 +1,8 @@
 package worldofzuul;
 
-public class Game 
+import java.util.HashMap;
+
+public class Game
 {
     private Parser parser;
     private Room currentRoom;
@@ -15,17 +17,23 @@ public class Game
 
     private void createRooms()
     {
-        Room outside, theatre, pub, lab, office;
+        Room outside, theatre, pub, lab, office, secretRoom;
       
         outside = new Room("outside the main entrance of the university");
         theatre = new Room("in a lecture theatre");
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
-        
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        secretRoom = new Room("in a super secret room! Shh", new HashMap<>() {{
+            put("out", outside);
+        }});
+
+        outside.setExits(new HashMap<>() {{
+            put("east", theatre);
+            put("south", lab);
+            put("west", pub);
+            put("secret", secretRoom);
+        }});
 
         theatre.setExit("west", outside);
 
@@ -49,7 +57,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing. Goodbye.");
     }
 
     private void printWelcome()
@@ -68,28 +76,23 @@ public class Game
 
         CommandWord commandWord = command.getCommandWord();
 
-        if(commandWord == CommandWord.UNKNOWN) {
-            System.out.println("I don't know what you mean...");
-            return false;
+        switch (commandWord) {
+            case UNKNOWN -> {
+                System.out.println("I don't know what you mean...");
+                return false;
+            }
+            case HELP -> printHelp();
+            case GO -> goRoom(command);
+            case INVENTORY -> System.out.println("Your inventory contains the following items");
+            case QUIT -> wantToQuit = quit(command);
         }
 
-        if (commandWord == CommandWord.HELP) {
-            printHelp();
-        }
-        else if (commandWord == CommandWord.GO) {
-            goRoom(command);
-        }
-        else if (commandWord == CommandWord.QUIT) {
-            wantToQuit = quit(command);
-        }
         return wantToQuit;
     }
 
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
-        System.out.println();
+        System.out.println("You are lost. You are alone. You wander around at the university.\n");
         System.out.println("Your command words are:");
         parser.showCommands();
     }
