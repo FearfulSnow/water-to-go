@@ -10,10 +10,13 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;
 
+    private int waterCost;
+
     public Room(String description) 
     {
         this.description = description;
         exits = new HashMap<String, Room>();
+        this.waterCost = waterCost;
     }
 
     public void setExit(String direction, Room neighbor) 
