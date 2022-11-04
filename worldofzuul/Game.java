@@ -1,5 +1,6 @@
 package worldofzuul;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Game
@@ -7,6 +8,8 @@ public class Game
     private final Parser parser;
     private Room currentRoom;
     public Inventory inventory;
+
+    public Task currentTask;
         
 
     public Game() 
@@ -22,6 +25,8 @@ public class Game
         Room outside = new Room("outside", "outside the main entrance of the university", 10);
         Room secretRoom = new Room("secret room", "in a super secret room! Shh", 10);
         Room waterSource = new Room("water source", "by a well filled with fresh water", 20);
+        Room FnRoom = new FnRoom("fn room", "An encampment filled with people pretending to care.", 20);
+
 
         outside.setExits(new HashMap<>() {{
             put("secret", secretRoom);
@@ -38,6 +43,43 @@ public class Game
 
         currentRoom = outside;
     }
+
+
+
+    public void createTasks(){
+
+        // adding like tasks and such to like an array list to manage them i guess? idk u figure it out einestien. t(-.-t)
+        if (currentRoom instanceof FnRoom){
+
+            ((FnRoom) currentRoom).setTaskArrayList(new ArrayList<>(){{
+                add(new Task(0, "Welcome to the FN encampment, we're short on supplies at the moment, please find us 5 AAA batteries. We will reward you with pipe.", new Item("5 AAA batteries", 1), new Item("pipe", 1)));
+                add(new Task(1, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
+                add(new Task(2, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
+                add(new Task(3, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
+                add(new Task(4, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
+                add(new Task(5, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
+                add(new Task(6, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
+                add(new Task(7, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
+                add(new Task(8, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
+                add(new Task(9, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
+            }});
+
+                for (Task task:((FnRoom) currentRoom).getTaskArrayList()) {
+
+                    if (!currentTask.isCompleated){
+
+
+                    }
+
+
+                }
+            }
+
+
+        }
+
+
+
 
     public void play() 
     {            
@@ -111,6 +153,14 @@ public class Game
                 } else {
                     System.out.println("Missing 2nd argument");
                 }
+            }
+            case ACCEPTTASK -> {
+                if(!currentRoom.getName().equals("fn room"))return false;
+
+            }
+            case COMPLETETASK -> {
+                if(!currentRoom.getName().equals("fn room"))return false;
+                System.out.println("din mor");
             }
             case QUIT -> wantToQuit = quit(command);
         }
