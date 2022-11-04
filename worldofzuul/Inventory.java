@@ -5,18 +5,29 @@ import java.util.List;
 
 public class Inventory {
   private int water;
+  private int maxWater = 100;
   private List<Item> items = new ArrayList<>();
-
-  public int getWater() {
-    return water;
-  }
 
   public Inventory(int water) {
     this.water = water;
   }
 
+  public int getWater() {
+    return water;
+  }
+
   public void setWater(int water) {
     this.water = water;
+    if (this.water > this.maxWater) this.water = this.maxWater;
+    if (this.water < 0) this.water = 0;
+  }
+
+  public int getMaxWater() {
+    return maxWater;
+  }
+
+  public void setMaxWater(int maxWater) {
+    this.maxWater = maxWater;
   }
 
   public Item getItem(String name) {
@@ -65,12 +76,4 @@ public class Inventory {
   public void setItems(List<Item> items) {
     this.items = items;
   }
-
-//  public static void main(String[] args) {
-//    Item rock = new Item("Rock", 1);
-//    Inventory inventory = new Inventory(100);
-//    inventory.addItem(rock.getName(), rock.getQuantity());
-//
-//    System.out.println(inventory.getItem("Rock").toString());
-//  }
 }
