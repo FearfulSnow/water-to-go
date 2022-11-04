@@ -4,45 +4,37 @@ import java.util.HashMap;
 
 public class Game
 {
-    private Parser parser;
+    private final Parser parser;
     private Room currentRoom;
+    public Inventory inventory;
         
 
     public Game() 
     {
         createRooms();
         parser = new Parser();
+        inventory = new Inventory(100);
     }
 
 
     private void createRooms()
     {
-        Room outside, theatre, pub, lab, office, secretRoom;
-      
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        secretRoom = new Room("in a super secret room! Shh", new HashMap<>() {{
-            put("out", outside);
-        }});
+        Room outside = new Room("outside", "outside the main entrance of the university", 10);
+        Room secretRoom = new Room("secret room", "in a super secret room! Shh", 10);
+        Room waterSource = new Room("water source", "by a well filled with fresh water", 20);
 
         outside.setExits(new HashMap<>() {{
-            put("east", theatre);
-            put("south", lab);
-            put("west", pub);
             put("secret", secretRoom);
+            put("well", waterSource);
         }});
 
-        theatre.setExit("west", outside);
+        secretRoom.setExits(new HashMap<>() {{
+            put("home", outside);
+        }});
 
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
+        waterSource.setExits(new HashMap<>() {{
+            put("home", outside);
+        }});
 
         currentRoom = outside;
     }
@@ -53,11 +45,24 @@ public class Game
 
                 
         boolean finished = false;
-        while (! finished) {
+        while (!finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+            if (inventory.getWater() == 0 && !currentRoom.getName().equals("water source") && !canMove()) {
+                break;
+            }
         }
         System.out.println("Thank you for playing. Goodbye.");
+    }
+
+    private boolean canMove() {
+        boolean canMove = true;
+        for (Room room : currentRoom.getExits().values()) {
+            canMove = room.getWaterCost() <= inventory.getWater();
+            if (canMove) return true;
+        }
+
+        return canMove;
     }
 
     private void printWelcome()
@@ -83,7 +88,30 @@ public class Game
             }
             case HELP -> printHelp();
             case GO -> goRoom(command);
-            case INVENTORY -> System.out.println("Your inventory contains the following items");
+            case INVENTORY -> {
+                if (inventory.getItems().isEmpty()) {
+                    System.out.println("Your inventory is empty.");
+                } else {
+                    System.out.println("Your inventory contains the following items:");
+                    inventory.itemsToString();
+                }
+            }
+            case GIVE -> {
+                // For testing purposes
+                if (command.hasSecondWord()) {
+                    inventory.addItem(command.getSecondWord(), 1);
+                } else {
+                    System.out.println("Missing 2nd argument");
+                }
+            }
+            case REMOVE -> {
+                // For testing purposes
+                if (command.hasSecondWord()) {
+                    inventory.removeItem(command.getSecondWord(), 1);
+                } else {
+                    System.out.println("Missing 2nd argument");
+                }
+            }
             case QUIT -> wantToQuit = quit(command);
         }
 
@@ -113,8 +141,18 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
+            inventory.setWater(inventory.getWater() - nextRoom.getWaterCost());
+            System.out.printf("You have %d water remaining.\n", inventory.getWater());
+            if (inventory.getWater() == 0 && !currentRoom.getName().equals("water source")) {
+                youLose();
+                return;
+            }
             System.out.println(currentRoom.getLongDescription());
         }
+    }
+
+    private void youLose() {
+        System.out.println("You have run out of water and can no longer continue. Try again.");
     }
 
     private boolean quit(Command command) 
