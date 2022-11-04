@@ -101,6 +101,14 @@ public class Game
                     System.out.println("Missing 2nd argument");
                 }
             }
+            case REMOVE -> {
+                // For testing purposes
+                if (command.hasSecondWord()) {
+                    inventory.removeItem(command.getSecondWord(), 1);
+                } else {
+                    System.out.println("Missing 2nd argument");
+                }
+            }
             case QUIT -> wantToQuit = quit(command);
         }
 

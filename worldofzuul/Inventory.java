@@ -46,6 +46,7 @@ public class Inventory {
     } else {
       this.getItem(name).setQuantity(item.getQuantity() + quantity);
     }
+    System.out.printf("Added %dx %s to inventory.\n", quantity, name);
   }
 
   public void removeItem(String name, int quantity) {
@@ -58,6 +59,7 @@ public class Inventory {
     if (this.getItem(name).getQuantity() <= 0) {
       this.items.remove(this.getItem(name));
     }
+    System.out.printf("Removed %dx %s from inventory.\n", quantity, name);
   }
 
   public void setItems(List<Item> items) {
