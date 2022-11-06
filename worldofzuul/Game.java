@@ -1,6 +1,5 @@
 package worldofzuul;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Game {
@@ -116,14 +115,31 @@ public class Game {
                     System.out.println("Missing 2nd argument");
                 }
             }
+            case TASK -> {
+                if (currentTask == null) System.out.println("You have no task");
+                else System.out.println(currentTask);
+            }
             case ACCEPTTASK -> {
-                if (!currentRoom.getName().equals("fn room")) return false;
+                if (!currentRoom.getName().equals("fn room")) {
+                    System.out.println("Not in FN room");
+                    return false;
+                }
                 currentTask = ((FnRoom) currentRoom).giveTask(((FnRoom) currentRoom).getCurrentTaskIndex());
             }
             case COMPLETETASK -> {
-                if (!currentRoom.getName().equals("fn room")) return false;
-                ((FnRoom) currentRoom).completeTask(((FnRoom) currentRoom).getCurrentTaskIndex());
-                currentTask = null;
+                if (!currentRoom.getName().equals("fn room")) {
+                    System.out.println("Not in FN room");
+                    return false;
+                }
+                if (currentTask.isRequirementsMet(inventory)) {
+                    ((FnRoom) currentRoom).completeTask(((FnRoom) currentRoom).getCurrentTaskIndex());
+                    // maybe make additional signature for function that takes Item
+                    inventory.removeItem(currentTask.getRequirement().getName(), currentTask.getRequirement().getQuantity());
+                    inventory.addItem(currentTask.getReward().getName(), currentTask.getReward().getQuantity());
+                    currentTask = null;
+                } else {
+                    System.out.println("Requirements not met");
+                }
             }
             case QUIT -> wantToQuit = quit(command);
         }

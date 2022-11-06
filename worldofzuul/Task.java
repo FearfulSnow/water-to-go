@@ -20,16 +20,26 @@ public class Task {
     }
 
     public void completeTask() {
+        System.out.println("Completed task");
         isCompleted = true;
     }
 
 
-    public boolean isRequirementsMet() {
-        return false;
+    public boolean isRequirementsMet(Inventory inventory) {
+        System.out.println("Checking requirements");
+        return inventory.getItem(requirement.getName()) != null && inventory.getItem(requirement.getName()).getQuantity() >= requirement.getQuantity();
     }
 
     public boolean isCompleted() {
         return isCompleted;
+    }
+
+    public Item getRequirement() {
+        return requirement;
+    }
+
+    public Item getReward() {
+        return reward;
     }
 
     @Override

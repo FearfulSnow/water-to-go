@@ -9,6 +9,7 @@ public class FnRoom extends Room{
     public FnRoom(String name, String description, int waterCost)
     {
         super(name, description, waterCost);
+        createTasks();
     }
     public ArrayList<Task> getTaskArrayList() {
         return taskArrayList;
@@ -19,7 +20,7 @@ public class FnRoom extends Room{
 
     private void createTasks() {
         setTaskArrayList(new ArrayList<>(){{
-            add(new Task(0, "Welcome to the FN encampment, we're short on supplies at the moment, please find us 5 AAA batteries. We will reward you with pipe.", new Item("5 AAA batteries", 1), new Item("pipe", 1)));
+            add(new Task(0, "Welcome to the FN encampment, we're short on supplies at the moment, please find us 5 AAA batteries. We will reward you with pipe.", new Item("battery", 1), new Item("pipe", 1)));
             add(new Task(1, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
             add(new Task(2, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
             add(new Task(3, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
@@ -41,28 +42,15 @@ public class FnRoom extends Room{
     }
 
     public Task giveTask(int id) {
-        // gives task
+        System.out.println("Give task #" + id);
         return taskArrayList.get(id);
     }
 
     public void completeTask(int id) {
-        // completes task
+        System.out.println("Complete task #" + id);
         taskArrayList.get(id).completeTask();
         setCurrentTaskIndex(id + 1);
+        System.out.println("Next task index is " + currentTaskIndex);
     }
-/* for testing if shit acutally works in FnRoom class
-
-    public static void main(String[] args) {
-        System.out.println();
-
-        FnRoom myRoom = new FnRoom("Test room", "test descrip", 100);
-
-        myRoom.createTasks();
-        System.out.println(myRoom.taskArrayList);
-
-    }
-
-*/
-
 }
 
