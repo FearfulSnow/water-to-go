@@ -125,6 +125,7 @@ public class Game {
                     return false;
                 }
                 currentTask = ((FnRoom) currentRoom).giveTask(((FnRoom) currentRoom).getCurrentTaskIndex());
+                System.out.println(currentTask.getDescription());
             }
             case COMPLETETASK -> {
                 if (!currentRoom.getName().equals("fn room")) {

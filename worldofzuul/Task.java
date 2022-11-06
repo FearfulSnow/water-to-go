@@ -34,6 +34,10 @@ public class Task {
         return isCompleted;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public Item getRequirement() {
         return requirement;
     }
