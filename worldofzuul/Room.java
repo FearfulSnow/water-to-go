@@ -5,23 +5,34 @@ import java.util.HashMap;
 
 public class Room 
 {
-    private String description;
+    private final String name;
+    private final String description;
     private HashMap<String, Room> exits;
+    private int waterCost;
 
-    public Room(String description) 
+    public Room(String name, String description, int waterCost)
     {
+        this.name = name;
         this.description = description;
+        this.waterCost = waterCost;
         exits = new HashMap<>();
-    }
-
-    public Room(String description, HashMap<String, Room> exits) {
-        this.description = description;
-        this.exits = exits;
     }
 
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
+    }
+
+    public int getWaterCost() {
+        return waterCost;
+    }
+
+    public void setWaterCost(int waterCost) {
+        this.waterCost = waterCost;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setExits(HashMap<String, Room> exitsList) {
@@ -35,7 +46,7 @@ public class Room
 
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+        return description + ".\n" + getExitString();
     }
 
     private String getExitString()
@@ -51,6 +62,10 @@ public class Room
     public Room getExit(String direction) 
     {
         return exits.get(direction);
+    }
+
+    public HashMap<String, Room> getExits() {
+        return exits;
     }
 }
 
