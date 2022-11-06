@@ -20,16 +20,9 @@ public class FnRoom extends Room{
 
     private void createTasks() {
         setTaskArrayList(new ArrayList<>(){{
-            add(new Task(0, "Welcome to the FN encampment, we're short on supplies at the moment, please find us 5 AAA batteries. We will reward you with pipe.", new Item("battery", 1), new Item("pipe", 1)));
-            add(new Task(1, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
-            add(new Task(2, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
-            add(new Task(3, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
-            add(new Task(4, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
-            add(new Task(5, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
-            add(new Task(6, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
-            add(new Task(7, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
-            add(new Task(8, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
-            add(new Task(9, "get the ", new Item("placeholder requirement", 1), new Item("pipe", 1)));
+            add(new Task(0, "Welcome to FN. Our main goal is to install pipes from the village to the water source to reduce the time spent on water collection.\nYour first task is to collect 2 salt water batteries and return it back to us.\nYour reward will be a pipe that you can use to install the pipeline to reduce the distance for villagers to obtain water.", new Item("salt water battery", 2), new Item("pipe", 1)));
+            add(new Task(1, "In this task, you need to obtain 3 metal scraps.\nYour reward will be a pipe that you can use to install the pipeline to reduce the distance for villagers to obtain water.", new Item("metal scrap", 3), new Item("pipe", 1)));
+            add(new Task(2, "In this task, you need to obtain 6 filters and return them back to us.", new Item("filter", 6), new Item("pipe", 1)));
         }});
     }
 

@@ -18,20 +18,14 @@ public class Game {
 
 
     private void createRooms() {
-        Room home = new Room("home", "at the village in Togo", 10);
-        Room secretRoom = new Room("secret room", "in a super secret room! Shh", 10);
-        Room waterSource = new Room("water source", "by a well filled with fresh water", 20);
-        Room fnRoom = new FnRoom("fn room", "An encampment filled with people pretending to care.", 20);
+        Room home = new Room("home", "You are now in the village", 10);
+        Room waterSource = new Room("water source", "You are now by the water source. Here you can refill your water bottle", 20);
+        Room fnRoom = new FnRoom("fn room", "You are now in the FN-room. Here you can accept or complete tasks", 20);
 
 
         home.setExits(new HashMap<>() {{
-            put("secret", secretRoom);
             put("well", waterSource);
             put("fn", fnRoom);
-        }});
-
-        secretRoom.setExits(new HashMap<>() {{
-            put("home", home);
         }});
 
         waterSource.setExits(new HashMap<>() {{
@@ -138,6 +132,7 @@ public class Game {
                     inventory.removeItem(currentTask.getRequirement().getName(), currentTask.getRequirement().getQuantity());
                     inventory.addItem(currentTask.getReward().getName(), currentTask.getReward().getQuantity());
                     currentTask = null;
+                    System.out.println("Well done! You have completed the task. Feel free to accept the next one!");
                 } else {
                     System.out.println("Requirements not met");
                 }
