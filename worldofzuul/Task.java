@@ -2,17 +2,15 @@ package worldofzuul;
 
 public class Task {
 
-    private int id;
+    private final int id;
 
-    private String description;
+    private final String description;
 
-    public boolean isCompleated;
+    public boolean isCompleted;
 
-    private Item requirement;
+    private final Item requirement;
 
-    private Item reward;
-
-    private Inventory inventory;
+    private final Item reward;
 
     public Task(int id, String description, Item requirement, Item reward) {
         this.id = id;
@@ -21,33 +19,27 @@ public class Task {
         this.reward = reward;
     }
 
-    public void completeTask(){
-
-        if (isRequirementsMeet()) {
-            isCompleated = isRequirementsMeet();
-            inventory.removeItem(requirement.getName(),1);
-        }
-
+    public void completeTask() {
+        isCompleted = true;
     }
 
 
-    public boolean isRequirementsMeet(){
-        for (Item item: inventory.getItems()){if(requirement.equals(inventory.getItems()));
-
-            return true;
-        }
-
+    public boolean isRequirementsMet() {
         return false;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
     }
 
     @Override
     public String toString() {
         return "Task{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", isCompleated=" + isCompleated +
-                ", requirement=" + requirement +
-                ", reward=" + reward +
-                '}';
+            "id=" + id +
+            ", description='" + description + '\'' +
+            ", isCompleted=" + isCompleted +
+            ", requirement=" + requirement +
+            ", reward=" + reward +
+            '}';
     }
 }

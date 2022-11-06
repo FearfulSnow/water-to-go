@@ -40,6 +40,14 @@ public class Command
         return secondWord;
     }
 
+    @Override
+    public String toString() {
+        return "Command{" +
+            "commandWord=" + commandWord +
+            ", secondWord='" + secondWord + '\'' +
+            '}';
+    }
+
     public boolean isUnknown()
     {
         return (commandWord == CommandWord.UNKNOWN);
