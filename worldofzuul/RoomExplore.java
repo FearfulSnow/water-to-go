@@ -2,17 +2,19 @@ package worldofzuul;
 
 import java.util.*;
 
-public class RoomExplore extends Room{
-
-    public RoomExplore(String description) {
-        super(description);
-    }
+public class RoomExplore extends Room {
 
     private ArrayList<String> itemList; //Arraylist made for items.
+
+    public RoomExplore(String name, String description, int waterCost) {
+        super(name, description, waterCost);
+    }
+
+
 // Arraylist initialized as an empty arraylist
 
 
-    private void createItem() {
+    public void createItem() {
         itemList = new ArrayList<>();
         //Arraylist is filled with different items.
 
@@ -28,7 +30,7 @@ public class RoomExplore extends Room{
     }
 
         //Returns the item which is collected
-    public void collectItem(){
+    public String collectItem(){
         //Find item, in the list (Random or searched for)
         //return found item
 
@@ -46,6 +48,8 @@ public class RoomExplore extends Room{
             System.out.println("You found nothing");
         } else {
             System.out.println("You found " + itemToReturn);
+            return itemToReturn;
         }
+        return null;
     }
 }
