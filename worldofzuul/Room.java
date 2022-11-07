@@ -1,25 +1,21 @@
 package worldofzuul;
 
-import java.util.Set;
 import java.util.HashMap;
 
-public class Room 
-{
+public class Room {
     private final String name;
     private final String description;
     private HashMap<String, Room> exits;
     private int waterCost;
 
-    public Room(String name, String description, int waterCost)
-    {
+    public Room(String name, String description, int waterCost) {
         this.name = name;
         this.description = description;
         this.waterCost = waterCost;
         exits = new HashMap<>();
     }
 
-    public void setExit(String direction, Room neighbor) 
-    {
+    public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
     }
 
@@ -39,28 +35,21 @@ public class Room
         this.exits = exitsList;
     }
 
-    public String getShortDescription()
-    {
+    public String getShortDescription() {
         return description;
     }
 
-    public String getLongDescription()
-    {
+    public String getLongDescription() {
         return description + ".\n" + getExitString();
     }
 
-    private String getExitString()
-    {
+    private String getExitString() {
         StringBuilder returnString = new StringBuilder("Exits:");
-        Set<String> keys = exits.keySet();
-        for(String exit : keys) {
-            returnString.append(" ").append(exit);
-        }
+        getExits().forEach((direction, neighbor) -> returnString.append(" ").append(direction).append(" (").append(neighbor.getWaterCost()).append(")"));
         return returnString.toString();
     }
 
-    public Room getExit(String direction) 
-    {
+    public Room getExit(String direction) {
         return exits.get(direction);
     }
 
@@ -68,4 +57,3 @@ public class Room
         return exits;
     }
 }
-
