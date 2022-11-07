@@ -8,6 +8,7 @@ public class RoomExplore extends Room {
 
     public RoomExplore(String name, String description, int waterCost) {
         super(name, description, waterCost);
+        createItem();
     }
 
 
@@ -29,27 +30,30 @@ public class RoomExplore extends Room {
         itemList.add(item3);
     }
 
-        //Returns the item which is collected
-    public String collectItem(){
+    //Returns the item which is collected
+    public String collectItem() {
         //Find item, in the list (Random or searched for)
         //return found item
 
         int sizeOfItemList = itemList.size();
 
-        int randomNumber = (int) (Math.random()*10);
+        int randomNumber = (int) (Math.random() * 10);
         int itemNumberToReturn = randomNumber;
-        if(randomNumber>sizeOfItemList) {
-            itemNumberToReturn = sizeOfItemList-1;
+        if (randomNumber > sizeOfItemList) {
+            itemNumberToReturn = sizeOfItemList - 1;
         }
 
         String itemToReturn = itemList.get(itemNumberToReturn);
 
-        if(itemToReturn.equals("nothing")) {
+        if (itemToReturn.equals("nothing")) {
             System.out.println("You found nothing");
         } else {
             System.out.println("You found " + itemToReturn);
-            return itemToReturn;
         }
-        return null;
+        return itemToReturn;
     }
+    /*public int getRandomItemNumber(int min, int max){
+        Random ran = new Random();
+        return ran.nextInt(max-min)+min;
+    }*/
 }
