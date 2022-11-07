@@ -1,30 +1,23 @@
 package worldofzuul;
-
-
 public class WaterSource extends Room {
-    private int waterCost;
+    private int waterDiscount;
 
-    public WaterSource (String desciption){
-        super(desciption);
-        this.waterCost = waterCost;
+    public WaterSource(String name, String description, int waterCost) {
+        super(name, description, waterCost);
+    }
+
+    public void setWaterDiscount(Inventory inventory) {
+        Item pipe = inventory.getItem("pipe");
+        waterDiscount = pipe.getQuantity() * 10;
+        if (waterDiscount > super.getWaterCost()) waterDiscount = super.getWaterCost();
     }
 
     public int getWaterDiscount() {
-        for (Item pipes: Inventory.items) {
-            if (pipes.equals("pipes")) {
-                int pipesAmount = pipes.getQuantity();
-                return pipesAmount;
-            }
-        }
+        return waterDiscount;
     }
 
-    //setWaterCost method
-    public void setWaterCost(){
-        this.waterCost = 10 - getWaterDiscount();
-        }
-    //collectWater method
-    public void collectWater(){ //Sets the water to full, which is 100
-        Inventory.setWater(Inventory.getMaxWater());
-
+    @Override
+    public int getWaterCost() {
+        return super.getWaterCost() - getWaterDiscount();
     }
 }
