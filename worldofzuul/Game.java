@@ -19,12 +19,12 @@ public class Game {
 
     private void createRooms() {
         Room home = new Room("home", "You are now in the village", 10);
-        Room waterSource = new Room("water source", "You are now by the water source. Here you can refill your water bottle", 20);
-        Room fnRoom = new FnRoom("fn room", "You are now in the FN-room. Here you can accept or complete tasks", 20);
+        Room waterSource = new WaterSource("water source", "You are now by the water source. Here you can refill your water bottle", 30);
+        Room fnRoom = new FnRoom("fn room", "You are now in the FN-room. Here you can accept or complete tasks", 10);
         Room exploreRoom = new RoomExplore("explore","You are now out exploring, looking for materials",20);
 
         home.setExits(new HashMap<>() {{
-            put("well", waterSource);
+            put("water", waterSource);
             put("fn", fnRoom);
             put("explore", exploreRoom);
         }});
@@ -150,6 +150,16 @@ public class Game {
                     System.out.println("Requirements not met");
                 }
             }
+            case FILL -> {
+                if (!currentRoom.getName().equals("water source")) {
+                    System.out.println("Not by a water source");
+                    return false;
+                } else {
+                    System.out.println("You fill your water bottle.");
+                    inventory.setWater(100);
+                    System.out.printf("You have %d water remaining.\n", inventory.getWater());
+                }
+            }
             case QUIT -> wantToQuit = quit(command);
         }
 
@@ -176,6 +186,8 @@ public class Game {
             System.out.println("There is no door!");
         } else {
             currentRoom = nextRoom;
+            if (currentRoom.getExit("water") != null && inventory.getItem("pipe") != null)
+                ((WaterSource) currentRoom.getExit("water")).setWaterDiscount(inventory);
             inventory.setWater(inventory.getWater() - nextRoom.getWaterCost());
             System.out.printf("You have %d water remaining.\n", inventory.getWater());
             if (inventory.getWater() == 0 && !currentRoom.getName().equals("water source")) {
