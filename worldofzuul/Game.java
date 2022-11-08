@@ -21,11 +21,12 @@ public class Game {
         Room home = new Room("home", "You are now in the village", 10);
         Room waterSource = new WaterSource("water source", "You are now by the water source. Here you can refill your water bottle", 30);
         Room fnRoom = new FnRoom("fn room", "You are now in the FN-room. Here you can accept or complete tasks", 10);
-
+        Room exploreRoom = new RoomExplore("explore","You are now out exploring, looking for materials",20);
 
         home.setExits(new HashMap<>() {{
             put("water", waterSource);
             put("fn", fnRoom);
+            put("explore", exploreRoom);
         }});
 
         waterSource.setExits(new HashMap<>() {{
@@ -34,6 +35,10 @@ public class Game {
 
         fnRoom.setExits(new HashMap<>() {{
             put("home", home);
+        }});
+
+        exploreRoom.setExits(new HashMap<>() {{
+            put("home",home);
         }});
 
         currentRoom = home;
@@ -91,6 +96,18 @@ public class Game {
                 } else {
                     System.out.println("Your inventory contains the following items:");
                     inventory.itemsToString();
+                }
+            }
+            case SEARCH -> {
+                if (!currentRoom.getName().equals("explore")) {
+                    System.out.println("You can't search in here");
+                } else {
+                    //currentRoom = RoomExplore
+                    inventory.setWater(inventory.getWater()-10);
+                    System.out.printf("You have %d water remaining.\n", inventory.getWater());
+                    Item currentItem =((RoomExplore)currentRoom).collectItem();
+                    if (currentItem == null) return false;
+                    inventory.addItem(currentItem.getName(),currentItem.getQuantity());
                 }
             }
             case GIVE -> {
