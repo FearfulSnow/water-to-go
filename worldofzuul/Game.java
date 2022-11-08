@@ -103,7 +103,11 @@ public class Game {
                     System.out.println("You can't search in here");
                 } else {
                     //currentRoom = RoomExplore
-                    inventory.addItem(((RoomExplore)currentRoom).collectItem(),2);
+                    inventory.setWater(inventory.getWater()-10);
+                    System.out.printf("You have %d water remaining.\n", inventory.getWater());
+                    Item currentItem =((RoomExplore)currentRoom).collectItem();
+                    if (currentItem == null) return false;
+                    inventory.addItem(currentItem.getName(),currentItem.getQuantity());
                 }
             }
             case GIVE -> {
