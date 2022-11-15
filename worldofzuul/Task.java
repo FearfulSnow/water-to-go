@@ -6,8 +6,6 @@ public class Task {
 
     private final String description;
 
-    public boolean isCompleted;
-
     private final Item requirement;
 
     private final Item reward;
@@ -19,19 +17,21 @@ public class Task {
         this.reward = reward;
     }
 
-    public void completeTask() {
-        System.out.println("Completed task");
-        isCompleted = true;
+    public boolean completeTask() {
+        if (!isRequirementsMet()) {
+            System.out.println("Requirements not met.");
+            return false;
+        }
+        InventorySingle.removeItem(requirement.getName(), requirement.getQuantity());
+        InventorySingle.addItem(reward.getName(), reward.getQuantity());
+        System.out.println("Well done! You have completed the task. Feel free to accept the next one!");
+        return true;
     }
 
 
-    public boolean isRequirementsMet(Inventory inventory) {
+    public boolean isRequirementsMet() {
         System.out.println("Checking requirements");
-        return inventory.getItem(requirement.getName()) != null && inventory.getItem(requirement.getName()).getQuantity() >= requirement.getQuantity();
-    }
-
-    public boolean isCompleted() {
-        return isCompleted;
+        return InventorySingle.getItem(requirement.getName()) != null && InventorySingle.getItem(requirement.getName()).getQuantity() >= requirement.getQuantity();
     }
 
     public String getDescription() {
@@ -51,7 +51,6 @@ public class Task {
         return "Task{" +
             "id=" + id +
             ", description='" + description + '\'' +
-            ", isCompleted=" + isCompleted +
             ", requirement=" + requirement +
             ", reward=" + reward +
             '}';
