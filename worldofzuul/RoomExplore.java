@@ -24,10 +24,10 @@ public class RoomExplore extends Room {
         if (itemToReturn.getName().equals("nothing")) {
             System.out.println("You found nothing");
         } else {
-            System.out.println("You found " + itemToReturn);
-            InventorySingle.addItem(itemToReturn);
+            System.out.printf("You found %dx %s\n", itemToReturn.getQuantity(), itemToReturn.getName());
+            Inventory.addItem(itemToReturn);
         }
-        InventorySingle.setWater(InventorySingle.getWater() - 10);
+        Inventory.setWater(Inventory.getWater() - 10);
     }
 
     private int getRandomItemNumber(int min, int max) {

@@ -4,34 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
-  private int water;
-  private int maxWater = 100;
-  private List<Item> items = new ArrayList<>();
+  private static Inventory inventory_instance = null;
+  private static int water;
+  private static int maxWater = 100;
+  private static List<Item> items = new ArrayList<>();
 
-  public Inventory(int water) {
-    this.water = water;
+  private Inventory(int _water) {
+    water = _water;
   }
 
-  public int getWater() {
+  public static Inventory getInstance() {
+    if (inventory_instance == null)
+      inventory_instance = new Inventory(100);
+
+    return inventory_instance;
+  }
+
+  public static int getWater() {
     return water;
   }
 
-  public void setWater(int water) {
-    this.water = water;
-    if (this.water > this.maxWater) this.water = this.maxWater;
-    if (this.water < 0) this.water = 0;
+  public static void setWater(int _water) {
+    water = _water;
+    if (water > maxWater) water = maxWater;
+    if (water < 0) water = 0;
+    System.out.printf("You have %d water remaining.\n", Inventory.getWater());
   }
 
   public int getMaxWater() {
     return maxWater;
   }
 
-  public void setMaxWater(int maxWater) {
-    this.maxWater = maxWater;
+  public void setMaxWater(int _maxWater) {
+    maxWater = _maxWater;
   }
 
-  public Item getItem(String name) {
-    for (Item item: this.items) {
+  public static Item getItem(String name) {
+    for (Item item: items) {
       if (item.getName().equals(name)) {
         return item;
       }
@@ -39,41 +48,66 @@ public class Inventory {
     return null;
   }
 
-  public List<Item> getItems() {
+  public static List<Item> getItems() {
     return items;
   }
 
-  public void itemsToString() {
+  public static void itemsToString() {
     for (Item item : items) {
       System.out.printf("%dx %s\n", item.getQuantity(), item.getName());
     }
   }
 
-  public void addItem(String name, int quantity) {
-    Item item = this.getItem(name);
+  public static void addItem(Item item) {
+    Item itemExists = getItem(item.getName());
+    if (itemExists == null) {
+      items.add(item);
+    } else {
+      getItem(item.getName()).setQuantity(itemExists.getQuantity() + item.getQuantity());
+    }
+    System.out.printf("Added %dx %s to inventory.\n", item.getQuantity(), item.getName());
+  }
+  public static void addItem(String name, int quantity) {
+    Item item = getItem(name);
     if (item == null) {
       Item toBeAdded = new Item(name, quantity);
-      this.items.add(toBeAdded);
+      items.add(toBeAdded);
     } else {
-      this.getItem(name).setQuantity(item.getQuantity() + quantity);
+      getItem(name).setQuantity(item.getQuantity() + quantity);
     }
     System.out.printf("Added %dx %s to inventory.\n", quantity, name);
   }
 
-  public void removeItem(String name, int quantity) {
-    Item item = this.getItem(name);
+  public static void removeItem(Item item) {
+    Item itemExists = getItem(item.getName());
+    if (itemExists == null) {
+      System.out.printf("Item %s does not exist in inventory", item.getName());
+      return;
+    }
+    if (itemExists.getQuantity() - item.getQuantity() < 0) {
+      System.out.println("Not enough items in inventory");
+      return;
+    }
+    getItem(item.getName()).setQuantity(itemExists.getQuantity() - item.getQuantity());
+    if (getItem(item.getName()).getQuantity() <= 0) {
+      items.remove(getItem(item.getName()));
+    }
+    System.out.printf("Removed %dx %s from inventory.\n", item.getQuantity(), item.getName());
+  }
+  public static void removeItem(String name, int quantity) {
+    Item item = getItem(name);
     if (item == null) {
       System.out.println("Item " + name + " does not exist in inventory");
       return;
     }
-    this.getItem(name).setQuantity(item.getQuantity() - quantity);
-    if (this.getItem(name).getQuantity() <= 0) {
-      this.items.remove(this.getItem(name));
+    getItem(name).setQuantity(item.getQuantity() - quantity);
+    if (getItem(name).getQuantity() <= 0) {
+      items.remove(getItem(name));
     }
     System.out.printf("Removed %dx %s from inventory.\n", quantity, name);
   }
 
-  public void setItems(List<Item> items) {
-    this.items = items;
+  public static void setItems(List<Item> _items) {
+    items = _items;
   }
 }

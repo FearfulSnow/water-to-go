@@ -10,6 +10,8 @@ public class Task {
 
     private final Item reward;
 
+    public boolean isCompleted = false;
+
     public Task(int id, String description, Item requirement, Item reward) {
         this.id = id;
         this.description = description;
@@ -22,16 +24,18 @@ public class Task {
             System.out.println("Requirements not met.");
             return false;
         }
-        InventorySingle.removeItem(requirement.getName(), requirement.getQuantity());
-        InventorySingle.addItem(reward.getName(), reward.getQuantity());
+        System.out.println("Requirements met!");
+        Inventory.removeItem(requirement);
+        Inventory.addItem(reward);
         System.out.println("Well done! You have completed the task. Feel free to accept the next one!");
+        isCompleted = true;
         return true;
     }
 
 
     public boolean isRequirementsMet() {
-        System.out.println("Checking requirements");
-        return InventorySingle.getItem(requirement.getName()) != null && InventorySingle.getItem(requirement.getName()).getQuantity() >= requirement.getQuantity();
+        System.out.printf("Checking requirements... \nNeeds %dx %s\n", requirement.getQuantity(), requirement.getName());
+        return Inventory.getItem(requirement.getName()) != null && Inventory.getItem(requirement.getName()).getQuantity() >= requirement.getQuantity();
     }
 
     public String getDescription() {
