@@ -6,9 +6,9 @@ public class WaterSource extends Room {
         super(name, description, waterCost);
     }
 
-    public void setWaterDiscount(Inventory inventory) {
-        Item pipe = inventory.getItem("pipe");
-        waterDiscount = pipe.getQuantity() * 10;
+    public void setWaterDiscount() {
+        Item pipe = Inventory.getItem("pipe");
+        if (pipe != null) waterDiscount = pipe.getQuantity() * 10;
         if (waterDiscount > super.getWaterCost()) waterDiscount = super.getWaterCost();
     }
 

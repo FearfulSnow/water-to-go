@@ -5,15 +5,13 @@ import java.util.HashMap;
 public class Game {
     private final Parser parser;
     private Room currentRoom;
-    public Inventory inventory;
-
     public Task currentTask;
 
 
     public Game() {
         createRooms();
         parser = new Parser();
-        inventory = new Inventory(100);
+        Inventory.getInstance();
     }
 
 
@@ -52,7 +50,7 @@ public class Game {
         while (!finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
-            if (inventory.getWater() == 0 && !currentRoom.getName().equals("water source") && !canMove()) {
+            if (Inventory.getWater() == 0 && !currentRoom.getName().equals("water source") && !canMove()) {
                 break;
             }
         }
@@ -62,7 +60,7 @@ public class Game {
     private boolean canMove() {
         boolean canMove = true;
         for (Room room : currentRoom.getExits().values()) {
-            canMove = room.getWaterCost() <= inventory.getWater();
+            canMove = room.getWaterCost() <= Inventory.getWater();
             if (canMove) return true;
         }
 
@@ -91,29 +89,24 @@ public class Game {
             case HELP -> printHelp();
             case GO -> goRoom(command);
             case INVENTORY -> {
-                if (inventory.getItems().isEmpty()) {
+                if (Inventory.getItems().isEmpty()) {
                     System.out.println("Your inventory is empty.");
                 } else {
                     System.out.println("Your inventory contains the following items:");
-                    inventory.itemsToString();
+                    Inventory.itemsToString();
                 }
             }
             case SEARCH -> {
                 if (!currentRoom.getName().equals("explore")) {
                     System.out.println("You can't search in here");
                 } else {
-                    //currentRoom = RoomExplore
-                    inventory.setWater(inventory.getWater()-10);
-                    System.out.printf("You have %d water remaining.\n", inventory.getWater());
-                    Item currentItem =((RoomExplore)currentRoom).collectItem();
-                    if (currentItem == null) return false;
-                    inventory.addItem(currentItem.getName(),currentItem.getQuantity());
+                    ((RoomExplore)currentRoom).collectItem();
                 }
             }
             case GIVE -> {
                 // For testing purposes
                 if (command.hasSecondWord()) {
-                    inventory.addItem(command.getSecondWord(), 1);
+                    Inventory.addItem(command.getSecondWord(), 1);
                 } else {
                     System.out.println("Missing 2nd argument");
                 }
@@ -121,7 +114,7 @@ public class Game {
             case REMOVE -> {
                 // For testing purposes
                 if (command.hasSecondWord()) {
-                    inventory.removeItem(command.getSecondWord(), 1);
+                    Inventory.removeItem(command.getSecondWord(), 1);
                 } else {
                     System.out.println("Missing 2nd argument");
                 }
@@ -135,24 +128,15 @@ public class Game {
                     System.out.println("Not in FN room");
                     return false;
                 }
-                currentTask = ((FnRoom) currentRoom).giveTask(((FnRoom) currentRoom).getCurrentTaskIndex());
-                System.out.println(currentTask.getDescription());
+                ((FnRoom) currentRoom).giveTask();
+                System.out.println(((FnRoom) currentRoom).currentTask.getDescription());
             }
             case COMPLETETASK -> {
                 if (!currentRoom.getName().equals("fn room")) {
                     System.out.println("Not in FN room");
                     return false;
                 }
-                if (currentTask.isRequirementsMet(inventory)) {
-                    ((FnRoom) currentRoom).completeTask(((FnRoom) currentRoom).getCurrentTaskIndex());
-                    // maybe make additional signature for function that takes Item
-                    inventory.removeItem(currentTask.getRequirement().getName(), currentTask.getRequirement().getQuantity());
-                    inventory.addItem(currentTask.getReward().getName(), currentTask.getReward().getQuantity());
-                    currentTask = null;
-                    System.out.println("Well done! You have completed the task. Feel free to accept the next one!");
-                } else {
-                    System.out.println("Requirements not met");
-                }
+                if (((FnRoom) currentRoom).currentTask.completeTask()) currentTask = null;
             }
             case FILL -> {
                 if (!currentRoom.getName().equals("water source")) {
@@ -160,8 +144,7 @@ public class Game {
                     return false;
                 } else {
                     System.out.println("You fill your water bottle.");
-                    inventory.setWater(100);
-                    System.out.printf("You have %d water remaining.\n", inventory.getWater());
+                    Inventory.setWater(100);
                 }
             }
             case QUIT -> wantToQuit = quit(command);
@@ -190,11 +173,10 @@ public class Game {
             System.out.println("There is no door!");
         } else {
             currentRoom = nextRoom;
-            if (currentRoom.getExit("water") != null && inventory.getItem("pipe") != null)
-                ((WaterSource) currentRoom.getExit("water")).setWaterDiscount(inventory);
-            inventory.setWater(inventory.getWater() - nextRoom.getWaterCost());
-            System.out.printf("You have %d water remaining.\n", inventory.getWater());
-            if (inventory.getWater() == 0 && !currentRoom.getName().equals("water source")) {
+            if (currentRoom.getExit("water") != null && Inventory.getItem("pipe") != null)
+                ((WaterSource) currentRoom.getExit("water")).setWaterDiscount();
+            Inventory.setWater(Inventory.getWater() - nextRoom.getWaterCost());
+            if (Inventory.getWater() == 0 && !currentRoom.getName().equals("water source")) {
                 youLose();
                 return;
             }
