@@ -1,22 +1,27 @@
 package worldofzuul;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 public class Room {
     private final String name;
     private final String description;
-    private HashMap<String, Room> exits;
+    private HashMap<String, Room> exits = new HashMap<>();
     private int waterCost;
+    private String bg;
+    JPanel p;
 
-    public Room(String name, String description, int waterCost) {
+    public Room(String name, String description, int waterCost, String bg) {
         this.name = name;
         this.description = description;
         this.waterCost = waterCost;
-        exits = new HashMap<>();
+        this.bg = bg;
+        p = new JPanel();
     }
 
-    public void setExit(String direction, Room neighbor) {
-        exits.put(direction, neighbor);
+    public JPanel getUI() {
+        p.add(new JLabel("background img", new ImageIcon(getClass().getResource(bg)), JLabel.CENTER));
+        return p;
     }
 
     public int getWaterCost() {

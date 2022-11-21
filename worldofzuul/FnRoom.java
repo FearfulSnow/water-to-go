@@ -7,8 +7,8 @@ public class FnRoom extends Room {
 
     public Task currentTask;
 
-    public FnRoom(String name, String description, int waterCost) {
-        super(name, description, waterCost);
+    public FnRoom(String name, String description, int waterCost, String bg) {
+        super(name, description, waterCost, bg);
         createTasks();
     }
 

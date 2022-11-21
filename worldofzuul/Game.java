@@ -1,25 +1,28 @@
 package worldofzuul;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 public class Game {
     private final Parser parser;
     private Room currentRoom;
     public Task currentTask;
+    private View view;
 
 
     public Game() {
         createRooms();
         parser = new Parser();
         Inventory.getInstance();
+        view = new View();
     }
 
 
     private void createRooms() {
-        Room home = new Room("home", "You are now in the village", 10);
-        Room waterSource = new WaterSource("water source", "You are now by the water source. Here you can refill your water bottle", 30);
-        Room fnRoom = new FnRoom("fn room", "You are now in the FN-room. Here you can accept or complete tasks", 10);
-        Room exploreRoom = new RoomExplore("explore","You are now out exploring, looking for materials",20);
+        Room home = new Room("home", "You are now in the village", 10, "assets/test1.png");
+        Room waterSource = new WaterSource("water source", "You are now by the water source. Here you can refill your water bottle", 30, "assets/test2.png");
+        Room fnRoom = new FnRoom("fn room", "You are now in the FN-room. Here you can accept or complete tasks", 10, "assets/test3.png");
+        Room exploreRoom = new RoomExplore("explore","You are now out exploring, looking for materials",20, "assets/test4.png");
 
         home.setExits(new HashMap<>() {{
             put("water", waterSource);
@@ -173,8 +176,13 @@ public class Game {
             System.out.println("There is no door!");
         } else {
             currentRoom = nextRoom;
-            if (currentRoom.getExit("water") != null && Inventory.getItem("pipe") != null)
+            view.getContentPane().removeAll();
+            view.add(currentRoom.getUI());
+            view.getContentPane().doLayout();
+            view.update(view.getGraphics());
+            if (currentRoom.getExit("water") != null && Inventory.getItem("pipe") != null) {
                 ((WaterSource) currentRoom.getExit("water")).setWaterDiscount();
+            }
             Inventory.setWater(Inventory.getWater() - nextRoom.getWaterCost());
             if (Inventory.getWater() == 0 && !currentRoom.getName().equals("water source")) {
                 youLose();

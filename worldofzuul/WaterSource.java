@@ -2,8 +2,8 @@ package worldofzuul;
 public class WaterSource extends Room {
     private int waterDiscount;
 
-    public WaterSource(String name, String description, int waterCost) {
-        super(name, description, waterCost);
+    public WaterSource(String name, String description, int waterCost, String bg) {
+        super(name, description, waterCost, bg);
     }
 
     public void setWaterDiscount() {

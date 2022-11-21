@@ -10,8 +10,8 @@ public class RoomExplore extends Room {
         add(new Item("nothing", 0));
     }};
 
-    public RoomExplore(String name, String description, int waterCost) {
-        super(name, description, waterCost);
+    public RoomExplore(String name, String description, int waterCost, String bg) {
+        super(name, description, waterCost, bg);
     }
 
     public void collectItem() {
