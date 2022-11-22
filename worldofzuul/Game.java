@@ -189,13 +189,11 @@ public class Game {
     }
 
     private void youLose() {
-        System.out.println();
-        System.out.println("You have run out of water and can no longer continue. Try again.");
+        System.out.println("\nYou have run out of water and can no longer continue. Try again.");
     }
 
     private void youWin(){
-        System.out.println();
-        System.out.println("You have won the game");
+        System.out.println("\nYou have won the game");
     }
 
     private boolean quit(Command command) {
