@@ -53,6 +53,10 @@ public class Game {
             if (Inventory.getWater() == 0 && !currentRoom.getName().equals("water source") && !canMove()) {
                 break;
             }
+            if (FnRoom.isAllTasksDone()){
+                youWin();
+                break;
+            }
         }
         System.out.println("Thank you for playing. Goodbye.");
     }
@@ -154,7 +158,7 @@ public class Game {
     }
 
     private void printHelp() {
-        System.out.println("You are lost. You are alone. You wander around at the university.\n");
+        System.out.println("You are lost. You are alone. You wander around Togo.\n");
         System.out.println("Your command words are:");
         parser.showCommands();
     }
@@ -185,7 +189,13 @@ public class Game {
     }
 
     private void youLose() {
+        System.out.println();
         System.out.println("You have run out of water and can no longer continue. Try again.");
+    }
+
+    private void youWin(){
+        System.out.println();
+        System.out.println("You have won the game");
     }
 
     private boolean quit(Command command) {
