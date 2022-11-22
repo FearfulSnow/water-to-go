@@ -7,6 +7,9 @@ public class RoomExplore extends Room {
     private ArrayList<Item> itemList = new ArrayList<>() {{
         add(new Item("salt water battery", 1));
         add(new Item("plastic", 1));
+        add(new Item("filter", 1));
+        add(new Item("metal scrap", 1));
+        add(new Item("pipe", 1));
         add(new Item("nothing", 0));
     }};
 

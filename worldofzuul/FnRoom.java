@@ -3,7 +3,7 @@ package worldofzuul;
 import java.util.ArrayList;
 
 public class FnRoom extends Room {
-    private ArrayList<Task> taskArrayList = new ArrayList<>();
+    private static ArrayList<Task> taskArrayList = new ArrayList<>();
 
     public Task currentTask;
 
@@ -40,6 +40,15 @@ public class FnRoom extends Room {
                 return;
             }
         }
+    }
+
+    public static boolean isAllTasksDone(){
+        for (Task task: taskArrayList) {
+            if (!task.isCompleted){
+                return false;
+            }
+        }
+        return true;
     }
 }
 
