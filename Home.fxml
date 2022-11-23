@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.Controllers.HomeController">
+   <children>
+      <Button layoutX="28.0" layoutY="308.0" mnemonicParsing="false" onAction="#goToFnRoom" text="FN Room" />
+      <Button layoutX="61.0" layoutY="351.0" mnemonicParsing="false" onAction="#goToExploreRoom" text="Explore Room" />
+      <Button layoutX="113.0" layoutY="308.0" mnemonicParsing="false" onAction="#goToWaterSource" text="Water Source" />
+      <ImageView fx:id="homeImage" fitHeight="240.0" fitWidth="1026.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@HomeBackground.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
