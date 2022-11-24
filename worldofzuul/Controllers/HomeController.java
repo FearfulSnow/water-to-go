@@ -15,7 +15,7 @@ public class HomeController {
 
     @FXML
     void goToExploreRoom(ActionEvent event) throws IOException {
-    root = FXMLLoader.load(getClass().getClassLoader().getResource("RoomExplore.fxml"));
+    root = FXMLLoader.load(getClass().getClassLoader().getResource("worldofzuul/Scenes/RoomExplore.fxml"));
     stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     scene = new Scene(root);
     stage.setScene(scene);
@@ -24,7 +24,7 @@ public class HomeController {
 
     @FXML
     void goToFnRoom(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("FnRoom.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("worldofzuul/Scenes/FnRoom.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -33,7 +33,7 @@ public class HomeController {
 
     @FXML
     void goToWaterSource(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("WaterSource.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("worldofzuul/Scenes/WaterSource.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

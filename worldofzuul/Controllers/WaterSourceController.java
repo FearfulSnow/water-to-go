@@ -29,7 +29,7 @@ public class WaterSourceController {
 
     @FXML
     void goToHome(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("Home.fxml"));
+        root = FXMLLoader.load(getClass().getClassLoader().getResource("worldofzuul/Scenes/Home.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

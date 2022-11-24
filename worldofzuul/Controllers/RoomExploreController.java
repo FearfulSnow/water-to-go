@@ -24,9 +24,9 @@ Room currentRoom;
 
         @FXML
         void goHome(ActionEvent event) throws IOException {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Home.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("worldofzuul/Scenes/Home.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            Image image = new Image(("HomeBackground.jpg"));
+            Image image = new Image(("worldofzuul/Assets/HomeBackground.jpg"));
             ImageView homeImage = new ImageView();
             homeImage.setImage(image);
             Scene scene = new Scene(root);
