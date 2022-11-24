@@ -19,11 +19,8 @@ public class WaterSourceController {
 
     @FXML
     void FillWater(ActionEvent event) throws IOException {
-
         textEX.setText("You fill your water bottle.");
-
         Inventory.setWater(100);
-
         }
 
 
