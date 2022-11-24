@@ -1,0 +1,7 @@
+.inventory-list {
+    -fx-border-radius: 4px;
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #2a2a2a;
+    -fx-padding: 8px;
+    -fx-background-radius: 4px;
+}
