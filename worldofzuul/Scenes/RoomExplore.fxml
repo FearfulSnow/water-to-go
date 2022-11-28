@@ -19,5 +19,6 @@
       <TextField fx:id="exploreTextBox" editable="false" layoutX="196.0" layoutY="318.0" prefHeight="39.0" prefWidth="196.0" />
       <ProgressBar layoutX="24.0" layoutY="23.0" prefWidth="200.0" progress="0.0" />
       <ProgressBar layoutX="194.0" layoutY="368.0" prefWidth="200.0" progress="0.0" />
+      <fx:include fx:id="inventory" source="Inventory.fxml" />
    </children>
 </AnchorPane>
