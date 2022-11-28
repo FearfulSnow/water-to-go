@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -15,7 +14,7 @@
             <Image url="@../Assets/HomeBackground.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="520.0" layoutY="14.0" mnemonicParsing="false" onAction="#toggleInventory" text="Inventory" />
+      <Button layoutX="520.0" layoutY="14.0" mnemonicParsing="false" text="Inventory" onAction="#toggleInventory" />
       <VBox fx:id="inventoryList" fillWidth="false" layoutX="486.0" layoutY="42.0" minWidth="100.0" styleClass="inventory-list" visible="false" AnchorPane.rightAnchor="14.0">
          <children>
             <Label fx:id="inventoryEmpty" text="Empty" visible="true" />

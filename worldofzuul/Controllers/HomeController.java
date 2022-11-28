@@ -14,14 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeController {
-    @FXML
-    private VBox inventoryList;
-    @FXML
-    private Label inventoryEmpty;
-
-    private List<HBox> inventoryRows = new ArrayList<>();
-
     SceneController sceneController = new SceneController();
+    InventoryController inventoryController = new InventoryController();
+
+    @FXML
+    void toggleInventory(ActionEvent event) throws IOException {
+        inventoryController.toggleInventory(event);
+    }
 
     @FXML
     void goToExploreRoom(ActionEvent event) throws IOException {
@@ -36,22 +35,6 @@ public class HomeController {
     @FXML
     void goToWaterSource(ActionEvent event) throws IOException {
         sceneController.goWaterSource(event);
-    }
-
-    @FXML
-    void toggleInventory(ActionEvent event) throws IOException {
-        inventoryEmpty.setVisible(Inventory.getItems().isEmpty());
-        inventoryEmpty.setManaged(Inventory.getItems().isEmpty());
-
-        inventoryList.getChildren().removeAll(inventoryRows);
-        inventoryRows.clear();
-        for (Item item : Inventory.getItems()) {
-            InventoryRow row = new InventoryRow(item);
-            inventoryRows.add(row.getRow());
-        }
-        inventoryList.getChildren().addAll(inventoryRows);
-
-        inventoryList.setVisible(!inventoryList.isVisible());
     }
 
 }
