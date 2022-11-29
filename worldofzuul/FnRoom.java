@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class FnRoom extends Room {
     private static ArrayList<Task> taskArrayList = new ArrayList<>();
 
-    public Task currentTask;
+    public static Task currentTask;
 
     public FnRoom(String name, String description, int waterCost) {
         super(name, description, waterCost);
         createTasks();
     }
 
-    public ArrayList<Task> getTaskArrayList() {
+    public static ArrayList<Task> getTaskArrayList() {
         return taskArrayList;
     }
 
@@ -28,7 +28,7 @@ public class FnRoom extends Room {
         }});
     }
 
-    public void giveTask() {
+    public static void giveTask() {
         if (currentTask != null && !currentTask.isCompleted) {
             System.out.println("Finish your current task first before accepting the next task.");
             return;
@@ -36,7 +36,7 @@ public class FnRoom extends Room {
         System.out.println("Accepted task");
         for (Task task : taskArrayList) {
             if (!task.isCompleted) {
-                this.currentTask = task;
+                currentTask = task;
                 return;
             }
         }
