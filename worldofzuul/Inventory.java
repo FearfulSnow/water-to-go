@@ -59,13 +59,15 @@ public class Inventory {
   }
 
   public static void addItem(Item item) {
+    // Prevent pass by reference
+    Item itemCopy = new Item(item.getName(), item.getQuantity());
     Item itemExists = getItem(item.getName());
     if (itemExists == null) {
-      items.add(item);
+      items.add(itemCopy);
     } else {
-      getItem(item.getName()).setQuantity(itemExists.getQuantity() + item.getQuantity());
+      getItem(itemCopy.getName()).setQuantity(itemExists.getQuantity() + itemCopy.getQuantity());
     }
-    System.out.printf("Added %dx %s to inventory.\n", item.getQuantity(), item.getName());
+    System.out.printf("Added %dx %s to inventory.\n", itemCopy.getQuantity(), itemCopy.getName());
   }
   public static void addItem(String name, int quantity) {
     Item item = getItem(name);
