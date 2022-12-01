@@ -9,17 +9,8 @@ import worldofzuul.FnRoom;
 import java.io.IOException;
 
 public class FnRoomController {
-    SceneController sceneController = new SceneController();
-    double currentProgress = 0.0;
     @FXML
     private TextField textEX;
-    @FXML
-    private ProgressBar TaskProgressBar;
-
-    @FXML
-    void goHome(ActionEvent event) throws IOException {
-        sceneController.goHome(event);
-    }
 
     @FXML
     void completeTask(ActionEvent event) throws IOException {
@@ -28,9 +19,6 @@ public class FnRoomController {
         } else if (FnRoom.currentTask.completeTask()) {
             FnRoom.currentTask = null;
             textEX.setText("Well done! You have completed the task. Feel free to accept the next one!");
-            currentProgress += 1/ (double) FnRoom.getTaskArrayList().size();
-            TaskProgressBar.setProgress(currentProgress);
-            //if (//win)
         } else {
             String str = "\nNeeds " + FnRoom.currentTask.getRequirement().getQuantity() + "x " + FnRoom.currentTask.getRequirement().getName() + "\n";
             textEX.setText(str);

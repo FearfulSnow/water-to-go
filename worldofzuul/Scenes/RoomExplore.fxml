@@ -14,8 +14,7 @@
                 <Image url="@../Assets/ExploreRoomBackground.jpg"/>
             </image>
         </ImageView>
-        <Button layoutX="53.0" layoutY="337.0" mnemonicParsing="false" onAction="#goHome" text="Home"/>
-        <Button layoutX="477.0" layoutY="337.0" mnemonicParsing="false" onAction="#search" text="Search"/>
+        <fx:include fx:id="navigation" source="Components/Navigation.fxml"/>
         <TextField fx:id="exploreTextBox" editable="false" layoutX="196.0" layoutY="318.0" prefHeight="39.0"
                    prefWidth="196.0"/>
         <fx:include fx:id="statusRow" source="Components/StatusRow.fxml"/>

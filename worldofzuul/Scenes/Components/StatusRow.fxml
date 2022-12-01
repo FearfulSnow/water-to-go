@@ -8,7 +8,7 @@
           xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="worldofzuul.Controllers.StatusRowController">
     <columnConstraints>
-        <ColumnConstraints prefWidth="200" hgrow="NEVER"/>
+        <ColumnConstraints prefWidth="250" hgrow="NEVER"/>
         <ColumnConstraints hgrow="NEVER"/>
         <ColumnConstraints hgrow="SOMETIMES"/>
         <ColumnConstraints hgrow="NEVER"/>
@@ -19,8 +19,8 @@
     <children>
         <Label fx:id="roomLabel" styleClass="room-label" text="Room" GridPane.columnIndex="0" GridPane.valignment="TOP"
                GridPane.vgrow="ALWAYS"/>
-        <fx:include fx:id="water" source="../WaterBar.fxml" GridPane.columnIndex="1"/>
-        <fx:include fx:id="tasks" source="../TaskBar.fxml" GridPane.columnIndex="2"/>
+        <fx:include fx:id="water" source="WaterBar.fxml" GridPane.columnIndex="1"/>
+        <fx:include fx:id="tasks" source="TaskBar.fxml" GridPane.columnIndex="2"/>
         <fx:include fx:id="inventory" source="Inventory.fxml" GridPane.columnIndex="3"/>
     </children>
 </GridPane>

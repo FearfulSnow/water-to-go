@@ -14,8 +14,7 @@
                 <Image url="@../Assets/WaterSource.jpg"/>
             </image>
         </ImageView>
-        <Button layoutX="58.0" layoutY="340.0" mnemonicParsing="false" onAction="#goToHome" text="Home"/>
-        <Button layoutX="528.0" layoutY="340.0" mnemonicParsing="false" onAction="#FillWater" text="Fill"/>
+        <fx:include fx:id="navigation" source="Components/Navigation.fxml"/>
         <TextField fx:id="textEX" alignment="CENTER" editable="false" layoutX="200.0" layoutY="327.0" prefHeight="51.0"
                    prefWidth="220.0"/>
         <fx:include fx:id="statusRow" source="Components/StatusRow.fxml"/>

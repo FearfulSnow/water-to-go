@@ -1,0 +1,12 @@
+.navigation-pane {
+    -fx-background-color: rgba(245, 245, 245, 0.8);
+    -fx-padding: 16 16 16 16;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.navigation-button {
+    -fx-font-size: 16;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #2c98b9;
+}

@@ -31,21 +31,21 @@ public class Game {
         Room exploreRoom = new RoomExplore("Wilderness","You are now out exploring, looking for materials",20);
 
         home.setExits(new HashMap<>() {{
-            put("water", waterSource);
-            put("fn", fnRoom);
-            put("explore", exploreRoom);
+            put("Well", waterSource);
+            put("United Nations", fnRoom);
+            put("Wilderness", exploreRoom);
         }});
 
         waterSource.setExits(new HashMap<>() {{
-            put("home", home);
+            put("Village", home);
         }});
 
         fnRoom.setExits(new HashMap<>() {{
-            put("home", home);
+            put("Village", home);
         }});
 
         exploreRoom.setExits(new HashMap<>() {{
-            put("home",home);
+            put("Village",home);
         }});
 
         currentRoom = home;
@@ -195,6 +195,13 @@ public class Game {
             }
             System.out.println(currentRoom.getLongDescription());
         }
+    }
+
+    public void goToRoom(RoomName roomName) {
+        Room nextRoom = currentRoom.getExit(roomName.toString());
+        currentRoom = nextRoom;
+        Inventory.setWater(Inventory.getWater() - nextRoom.getWaterCost());
+        // TODO: lose condition
     }
 
     private void youLose() {
