@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="worldofzuul.Controllers.InventoryController"
+            stylesheets="@../Styles/inventory.css">
+    <Button mnemonicParsing="false" text="Inventory" onAction="#toggleInventory" AnchorPane.rightAnchor="0"/>
+    <VBox fx:id="inventoryList" fillWidth="false" layoutY="30.0" minWidth="100.0"
+          styleClass="inventory-list" visible="false">
+        <children>
+            <Label fx:id="inventoryEmpty" text="Empty" visible="true"/>
+        </children>
+    </VBox>
+</AnchorPane>

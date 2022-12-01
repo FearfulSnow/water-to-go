@@ -6,16 +6,18 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.Controllers.WaterSourceController">
-   <children>
-      <ImageView fx:id="WaterSourceImage" fitHeight="248.0" fitWidth="635.0" layoutY="65.0" pickOnBounds="true">
-         <image>
-            <Image url="@../Assets/WaterSource.jpg" />
-         </image>
-      </ImageView>
-      <Button layoutX="58.0" layoutY="340.0" mnemonicParsing="false" onAction="#goToHome" text="Home" />
-      <Button layoutX="528.0" layoutY="340.0" mnemonicParsing="false" onAction="#FillWater" text="Fill" />
-      <TextField fx:id="textEX" alignment="CENTER" editable="false" layoutX="200.0" layoutY="327.0" prefHeight="51.0" prefWidth="220.0" />
-      <fx:include fx:id="inventory" source="Inventory.fxml" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="worldofzuul.Controllers.WaterSourceController">
+    <children>
+        <ImageView fx:id="WaterSourceImage" fitWidth="1600.0" preserveRatio="true" pickOnBounds="true">
+            <image>
+                <Image url="@../Assets/WaterSource.jpg"/>
+            </image>
+        </ImageView>
+        <Button layoutX="58.0" layoutY="340.0" mnemonicParsing="false" onAction="#goToHome" text="Home"/>
+        <Button layoutX="528.0" layoutY="340.0" mnemonicParsing="false" onAction="#FillWater" text="Fill"/>
+        <TextField fx:id="textEX" alignment="CENTER" editable="false" layoutX="200.0" layoutY="327.0" prefHeight="51.0"
+                   prefWidth="220.0"/>
+        <fx:include fx:id="statusRow" source="Components/StatusRow.fxml"/>
+    </children>
 </AnchorPane>

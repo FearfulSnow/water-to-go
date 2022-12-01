@@ -31,7 +31,7 @@ public class Inventory {
     System.out.printf("You have %d water remaining.\n", Inventory.getWater());
   }
 
-  public int getMaxWater() {
+  public static int getMaxWater() {
     return maxWater;
   }
 

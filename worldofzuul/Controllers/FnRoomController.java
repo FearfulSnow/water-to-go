@@ -32,7 +32,7 @@ public class FnRoomController {
             TaskProgressBar.setProgress(currentProgress);
             //if (//win)
         } else {
-            String str = "\nNeeds " + FnRoom.currentTask.getRequirement().getQuantity() + " " + FnRoom.currentTask.getRequirement().getName() + "\n";
+            String str = "\nNeeds " + FnRoom.currentTask.getRequirement().getQuantity() + "x " + FnRoom.currentTask.getRequirement().getName() + "\n";
             textEX.setText(str);
         }
     }

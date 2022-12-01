@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="worldofzuul.Controllers.WaterBarController"
+>
+    <Label text="Tasks"/>
+    <Label fx:id="waterAmountLabel" layoutX="160.0" text="100%" prefWidth="40.0" alignment="BASELINE_RIGHT"/>
+    <ProgressBar fx:id="waterBar" layoutY="20.0" prefWidth="200.0" progress="0.0" />
+</AnchorPane>

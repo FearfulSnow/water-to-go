@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.Controllers.RoomExploreController">
-   <children>
-      <ImageView fitHeight="250.0" fitWidth="600.0" layoutY="53.0" pickOnBounds="true">
-         <image>
-            <Image url="@../Assets/ExploreRoomBackground.jpg" />
-         </image>
-      </ImageView>
-      <Button layoutX="53.0" layoutY="337.0" mnemonicParsing="false" onAction="#goHome" text="Home" />
-      <Button layoutX="477.0" layoutY="337.0" mnemonicParsing="false" onAction="#search" text="Search" />
-      <TextField fx:id="exploreTextBox" editable="false" layoutX="196.0" layoutY="318.0" prefHeight="39.0" prefWidth="196.0" />
-      <ProgressBar layoutX="24.0" layoutY="23.0" prefWidth="200.0" progress="0.0" />
-      <ProgressBar layoutX="194.0" layoutY="368.0" prefWidth="200.0" progress="0.0" />
-      <fx:include fx:id="inventory" source="Inventory.fxml" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="worldofzuul.Controllers.RoomExploreController">
+    <children>
+        <ImageView fitWidth="1600.0" preserveRatio="true" pickOnBounds="true">
+            <image>
+                <Image url="@../Assets/ExploreRoomBackground.jpg"/>
+            </image>
+        </ImageView>
+        <Button layoutX="53.0" layoutY="337.0" mnemonicParsing="false" onAction="#goHome" text="Home"/>
+        <Button layoutX="477.0" layoutY="337.0" mnemonicParsing="false" onAction="#search" text="Search"/>
+        <TextField fx:id="exploreTextBox" editable="false" layoutX="196.0" layoutY="318.0" prefHeight="39.0"
+                   prefWidth="196.0"/>
+        <fx:include fx:id="statusRow" source="Components/StatusRow.fxml"/>
+    </children>
 </AnchorPane>
