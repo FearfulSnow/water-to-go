@@ -1,38 +1,30 @@
 package worldofzuul.Controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import worldofzuul.Controllers.Components.InventoryRow;
 import worldofzuul.Inventory;
-import worldofzuul.Item;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryController {
     @FXML
-    private VBox inventoryList;
+    private MenuItem inventoryEmpty;
     @FXML
-    private Label inventoryEmpty;
+    private MenuBar inventoryMenu;
 
-    private List<HBox> inventoryRows = new ArrayList<>();
+    private List<MenuItem> inventoryRows = new ArrayList<>();
+
     @FXML
-    public void toggleInventory(ActionEvent event) throws IOException {
+    private void update() {
         inventoryEmpty.setVisible(Inventory.getItems().isEmpty());
-        inventoryEmpty.setManaged(Inventory.getItems().isEmpty());
-
-        inventoryList.getChildren().removeAll(inventoryRows);
+        inventoryMenu.getMenus().get(0).getItems().removeAll(inventoryRows);
         inventoryRows.clear();
-        for (Item item : Inventory.getItems()) {
+        Inventory.getItems().forEach(item -> {
             InventoryRow row = new InventoryRow(item);
             inventoryRows.add(row.getRow());
-        }
-        inventoryList.getChildren().addAll(inventoryRows);
-
-        inventoryList.setVisible(!inventoryList.isVisible());
+        });
+        inventoryMenu.getMenus().get(0).getItems().addAll(inventoryRows);
     }
 }

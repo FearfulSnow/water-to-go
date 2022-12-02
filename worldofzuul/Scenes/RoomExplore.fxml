@@ -18,5 +18,6 @@
         <TextField fx:id="exploreTextBox" editable="false" layoutX="196.0" layoutY="318.0" prefHeight="39.0"
                    prefWidth="196.0"/>
         <fx:include fx:id="statusRow" source="Components/StatusRow.fxml"/>
+        <Button text="Explore" AnchorPane.bottomAnchor="16" AnchorPane.rightAnchor="16" onAction="#search"/>
     </children>
 </AnchorPane>
