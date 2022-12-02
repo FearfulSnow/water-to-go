@@ -1,15 +1,27 @@
 package worldofzuul;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public class FnRoom extends Room {
     private static ArrayList<Task> taskArrayList = new ArrayList<>();
 
     public static Task currentTask;
+    private static PropertyChangeSupport support;
 
     public FnRoom(String name, String description, int waterCost) {
         super(name, description, waterCost);
+        support = new PropertyChangeSupport(this);
         createTasks();
+    }
+
+    public static void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
+    }
+
+    public static void removePropertyChangeListener(PropertyChangeListener pcl) {
+        support.removePropertyChangeListener(pcl);
     }
 
     public static ArrayList<Task> getTaskArrayList() {
@@ -37,9 +49,16 @@ public class FnRoom extends Room {
         for (Task task : taskArrayList) {
             if (!task.isCompleted) {
                 currentTask = task;
+                support.firePropertyChange("currentTask", null, currentTask);
                 return;
             }
         }
+    }
+
+    public static void completeCurrentTask() {
+        currentTask.completeTask();
+        currentTask = null;
+        support.firePropertyChange("currentTask", null, currentTask);
     }
 
     public static boolean isAllTasksDone(){
