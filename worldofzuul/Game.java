@@ -5,7 +5,6 @@ import java.util.HashMap;
 public class Game {
     private final Parser parser;
     public Room currentRoom;
-    public Task currentTask;
 
     private static Game game_instance = null;
 
@@ -133,8 +132,8 @@ public class Game {
                 }
             }
             case TASK -> {
-                if (currentTask == null) System.out.println("You have no task");
-                else System.out.println(currentTask);
+                if (FnRoom.currentTask == null) System.out.println("You have no task");
+                else System.out.println(FnRoom.currentTask);
             }
             case ACCEPTTASK -> {
                 if (!currentRoom.getName().equals("United Nation Tent")) {
@@ -149,7 +148,7 @@ public class Game {
                     System.out.println("Not in FN room");
                     return false;
                 }
-                if (((FnRoom) currentRoom).currentTask.completeTask()) currentTask = null;
+                if (((FnRoom) currentRoom).currentTask.completeTask()) FnRoom.currentTask = null;
             }
             case FILL -> {
                 if (!currentRoom.getName().equals("Well")) {

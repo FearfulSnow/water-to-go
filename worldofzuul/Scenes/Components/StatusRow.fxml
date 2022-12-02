@@ -10,6 +10,7 @@
     <columnConstraints>
         <ColumnConstraints prefWidth="250" hgrow="NEVER"/>
         <ColumnConstraints hgrow="NEVER"/>
+        <ColumnConstraints hgrow="NEVER"/>
         <ColumnConstraints hgrow="SOMETIMES"/>
         <ColumnConstraints hgrow="NEVER"/>
     </columnConstraints>
@@ -21,6 +22,7 @@
                GridPane.vgrow="ALWAYS"/>
         <fx:include fx:id="water" source="WaterBar.fxml" GridPane.columnIndex="1"/>
         <fx:include fx:id="tasks" source="TaskBar.fxml" GridPane.columnIndex="2"/>
-        <fx:include fx:id="inventory" source="Inventory.fxml" GridPane.columnIndex="3"/>
+        <fx:include fx:id="taskTracker" source="TaskTracker.fxml" GridPane.columnIndex="3"/>
+        <fx:include fx:id="inventory" source="Inventory.fxml" GridPane.columnIndex="4"/>
     </children>
 </GridPane>
