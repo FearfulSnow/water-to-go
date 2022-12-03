@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="413.0" prefWidth="606.0" stylesheets="@Styles/fnroom.css" xmlns="http://javafx.com/javafx/19"
+<AnchorPane prefHeight="413.0" prefWidth="606.0" stylesheets="@Styles/actions.css" xmlns="http://javafx.com/javafx/19"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.Controllers.FnRoomController">
     <children>
         <ImageView fitWidth="1600.0" pickOnBounds="true" preserveRatio="true">
@@ -36,9 +36,9 @@
                         <Font name="System Bold" size="16.0"/>
                     </font>
                 </Label>
-                <Button fx:id="acceptButton" prefWidth="200.0" styleClass="accept-button" text="Accept task"
+                <Button fx:id="acceptButton" prefWidth="200.0" styleClass="button" text="Accept task"
                         onAction="#acceptTask"/>
-                <Button fx:id="completeButton" disable="true" prefWidth="200.0" styleClass="complete-button"
+                <Button fx:id="completeButton" disable="true" prefWidth="200.0" styleClass="button__green"
                         text="Complete task" onAction="#completeTask"/>
             </children>
         </FlowPane>
