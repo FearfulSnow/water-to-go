@@ -4,39 +4,47 @@ import java.util.HashMap;
 
 public class Game {
     private final Parser parser;
-    private Room currentRoom;
-    public Task currentTask;
+    public Room currentRoom;
+
+    private static Game game_instance = null;
 
 
-    public Game() {
+    private Game() {
         createRooms();
         parser = new Parser();
         Inventory.getInstance();
     }
 
+    public static Game getInstance() {
+        if (game_instance == null)
+            game_instance = new Game();
+
+        return game_instance;
+    }
+
 
     private void createRooms() {
-        Room home = new Room("home", "You are now in the village", 10);
-        Room waterSource = new WaterSource("water source", "You are now by the water source. Here you can refill your water bottle", 30);
-        Room fnRoom = new FnRoom("fn room", "You are now in the FN-room. Here you can accept or complete tasks", 10);
-        Room exploreRoom = new RoomExplore("explore","You are now out exploring, looking for materials",20);
+        Room home = new Room("Togonese Village", "You are now in the village", 10);
+        Room waterSource = new WaterSource("Well", "You are now by the water source. Here you can refill your water bottle", 30);
+        Room fnRoom = new FnRoom("United Nation Tent", "You are now in the FN-room. Here you can accept or complete tasks", 10);
+        Room exploreRoom = new RoomExplore("Wilderness","You are now out exploring, looking for materials",20);
 
         home.setExits(new HashMap<>() {{
-            put("water", waterSource);
-            put("fn", fnRoom);
-            put("explore", exploreRoom);
+            put("Well", waterSource);
+            put("United Nations", fnRoom);
+            put("Wilderness", exploreRoom);
         }});
 
         waterSource.setExits(new HashMap<>() {{
-            put("home", home);
+            put("Village", home);
         }});
 
         fnRoom.setExits(new HashMap<>() {{
-            put("home", home);
+            put("Village", home);
         }});
 
         exploreRoom.setExits(new HashMap<>() {{
-            put("home",home);
+            put("Village",home);
         }});
 
         currentRoom = home;
@@ -50,7 +58,7 @@ public class Game {
         while (!finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
-            if (Inventory.getWater() == 0 && !currentRoom.getName().equals("water source") && !canMove()) {
+            if (Inventory.getWater() == 0 && !currentRoom.getName().equals("Well") && !canMove()) {
                 break;
             }
             if (FnRoom.isAllTasksDone()){
@@ -101,7 +109,7 @@ public class Game {
                 }
             }
             case SEARCH -> {
-                if (!currentRoom.getName().equals("explore")) {
+                if (!currentRoom.getName().equals("Wilderness")) {
                     System.out.println("You can't search in here");
                 } else {
                     ((RoomExplore)currentRoom).collectItem();
@@ -124,11 +132,11 @@ public class Game {
                 }
             }
             case TASK -> {
-                if (currentTask == null) System.out.println("You have no task");
-                else System.out.println(currentTask);
+                if (FnRoom.currentTask == null) System.out.println("You have no task");
+                else System.out.println(FnRoom.currentTask);
             }
             case ACCEPTTASK -> {
-                if (!currentRoom.getName().equals("fn room")) {
+                if (!currentRoom.getName().equals("United Nation Tent")) {
                     System.out.println("Not in FN room");
                     return false;
                 }
@@ -136,14 +144,14 @@ public class Game {
                 System.out.println(((FnRoom) currentRoom).currentTask.getDescription());
             }
             case COMPLETETASK -> {
-                if (!currentRoom.getName().equals("fn room")) {
+                if (!currentRoom.getName().equals("United Nation Tent")) {
                     System.out.println("Not in FN room");
                     return false;
                 }
-                if (((FnRoom) currentRoom).currentTask.completeTask()) currentTask = null;
+                if (((FnRoom) currentRoom).currentTask.completeTask()) FnRoom.currentTask = null;
             }
             case FILL -> {
-                if (!currentRoom.getName().equals("water source")) {
+                if (!currentRoom.getName().equals("Well")) {
                     System.out.println("Not by a water source");
                     return false;
                 } else {
@@ -180,12 +188,19 @@ public class Game {
             if (currentRoom.getExit("water") != null && Inventory.getItem("pipe") != null)
                 ((WaterSource) currentRoom.getExit("water")).setWaterDiscount();
             Inventory.setWater(Inventory.getWater() - nextRoom.getWaterCost());
-            if (Inventory.getWater() == 0 && !currentRoom.getName().equals("water source")) {
+            if (Inventory.getWater() == 0 && !currentRoom.getName().equals("Well")) {
                 youLose();
                 return;
             }
             System.out.println(currentRoom.getLongDescription());
         }
+    }
+
+    public void goToRoom(RoomName roomName) {
+        Room nextRoom = currentRoom.getExit(roomName.toString());
+        currentRoom = nextRoom;
+        Inventory.setWater(Inventory.getWater() - nextRoom.getWaterCost());
+        // TODO: lose condition
     }
 
     private void youLose() {

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane hgap="16.0" prefWidth="600.0" styleClass="status-row" stylesheets="@../Styles/statusrow.css"
+          AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0"
+          xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="worldofzuul.Controllers.StatusRowController">
+    <columnConstraints>
+        <ColumnConstraints prefWidth="250" hgrow="NEVER"/>
+        <ColumnConstraints hgrow="NEVER"/>
+        <ColumnConstraints hgrow="NEVER"/>
+        <ColumnConstraints hgrow="SOMETIMES"/>
+        <ColumnConstraints hgrow="NEVER"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints valignment="CENTER"/>
+    </rowConstraints>
+    <children>
+        <Label fx:id="roomLabel" styleClass="room-label" text="Room" GridPane.columnIndex="0" GridPane.valignment="TOP"
+               GridPane.vgrow="ALWAYS"/>
+        <fx:include fx:id="water" source="WaterBar.fxml" GridPane.columnIndex="1"/>
+        <fx:include fx:id="tasks" source="TaskBar.fxml" GridPane.columnIndex="2"/>
+        <fx:include fx:id="taskTracker" source="TaskTracker.fxml" GridPane.columnIndex="3"/>
+        <fx:include fx:id="inventory" source="Inventory.fxml" GridPane.columnIndex="4"/>
+    </children>
+</GridPane>

@@ -4,12 +4,11 @@ import java.util.*;
 
 public class RoomExplore extends Room {
     // Arraylist made for items.
-    private ArrayList<Item> itemList = new ArrayList<>() {{
+    private static ArrayList<Item> itemList = new ArrayList<>() {{
         add(new Item("salt water battery", 1));
         add(new Item("plastic", 1));
         add(new Item("filter", 1));
         add(new Item("metal scrap", 1));
-        add(new Item("pipe", 1));
         add(new Item("nothing", 0));
     }};
 
@@ -17,7 +16,7 @@ public class RoomExplore extends Room {
         super(name, description, waterCost);
     }
 
-    public void collectItem() {
+    public static void collectItem() {
         //Find item, in the list (Random or searched for)
         //return found item
         int sizeOfItemList = itemList.size();
@@ -33,7 +32,7 @@ public class RoomExplore extends Room {
         Inventory.setWater(Inventory.getWater() - 10);
     }
 
-    private int getRandomItemNumber(int min, int max) {
+    private static int getRandomItemNumber(int min, int max) {
         Random ran = new Random();
         return ran.nextInt(max - min) + min;
     }

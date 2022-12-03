@@ -1,0 +1,12 @@
+.inventory-list {
+    -fx-border-radius: 4px;
+    -fx-background-color: #f5f5f5;
+    -fx-padding: 8px;
+    -fx-background-radius: 4px;
+}
+
+.inventory-button {
+    -fx-font-size: 16;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #2c98b9;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane stylesheets="@../Styles/inventory.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.Controllers.InventoryController">
+   <MenuBar fx:id="inventoryMenu" styleClass="inventory-button">
+     <menus>
+       <Menu mnemonicParsing="false" text="Inventory" onShowing="#update">
+         <items>
+           <MenuItem fx:id="inventoryEmpty" mnemonicParsing="false" text="Empty" />
+         </items>
+       </Menu>
+     </menus>
+   </MenuBar>
+</AnchorPane>

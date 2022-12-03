@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox spacing="8.0" styleClass="navigation-pane" stylesheets="@../Styles/navigation.css" AnchorPane.BottomAnchor="16.0" AnchorPane.LeftAnchor="16.0" fx:controller="worldofzuul.Controllers.NavigationController" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label text="Go to:">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <FlowPane fx:id="navigationPane" hgap="16.0" prefWrapLength="532.0" vgap="16.0">
+            <children>
+                <Button fx:id="village" onAction="#goHome" minWidth="120.0" mnemonicParsing="false" styleClass="navigation-button" text="Village" visible="false" managed="false">
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                    </padding>
+                </Button>
+                <Button fx:id="well" onAction="#goWaterSource" minWidth="120.0" mnemonicParsing="false" styleClass="navigation-button" text="Well" visible="false" managed="false">
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                    </padding>
+                </Button>
+                <Button fx:id="unitedNations" onAction="#goFnRoom" minWidth="120.0" mnemonicParsing="false" styleClass="navigation-button" text="United Nations" visible="false" managed="false">
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                    </padding>
+                </Button>
+                <Button fx:id="wilderness" onAction="#goExploreRoom" minWidth="120.0" mnemonicParsing="false" styleClass="navigation-button" text="Wilderness" visible="false" managed="false">
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                    </padding>
+                </Button>
+            </children>
+        </FlowPane>
+    </children>
+    <padding>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+    </padding>
+</VBox>

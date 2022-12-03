@@ -1,18 +1,30 @@
 package worldofzuul;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public class FnRoom extends Room {
     private static ArrayList<Task> taskArrayList = new ArrayList<>();
 
-    public Task currentTask;
+    public static Task currentTask;
+    private static PropertyChangeSupport support;
 
     public FnRoom(String name, String description, int waterCost) {
         super(name, description, waterCost);
+        support = new PropertyChangeSupport(this);
         createTasks();
     }
 
-    public ArrayList<Task> getTaskArrayList() {
+    public static void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
+    }
+
+    public static void removePropertyChangeListener(PropertyChangeListener pcl) {
+        support.removePropertyChangeListener(pcl);
+    }
+
+    public static ArrayList<Task> getTaskArrayList() {
         return taskArrayList;
     }
 
@@ -28,7 +40,7 @@ public class FnRoom extends Room {
         }});
     }
 
-    public void giveTask() {
+    public static void giveTask() {
         if (currentTask != null && !currentTask.isCompleted) {
             System.out.println("Finish your current task first before accepting the next task.");
             return;
@@ -36,10 +48,17 @@ public class FnRoom extends Room {
         System.out.println("Accepted task");
         for (Task task : taskArrayList) {
             if (!task.isCompleted) {
-                this.currentTask = task;
+                currentTask = task;
+                support.firePropertyChange("currentTask", null, currentTask);
                 return;
             }
         }
+    }
+
+    public static void completeCurrentTask() {
+        currentTask.completeTask();
+        currentTask = null;
+        support.firePropertyChange("currentTask", null, currentTask);
     }
 
     public static boolean isAllTasksDone(){

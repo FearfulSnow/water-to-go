@@ -1,0 +1,16 @@
+.action-pane {
+    -fx-background-color: rgba(245, 245, 245, 0.8);
+    -fx-background-radius: 4px;
+}
+
+.accept-button {
+    -fx-font-size: 16;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #2c98b9;
+}
+
+.complete-button {
+    -fx-font-size: 16;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #2cb948;
+}
