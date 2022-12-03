@@ -3,14 +3,14 @@ package worldofzuul.Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import worldofzuul.FnRoom;
 
 import java.io.IOException;
 
 public class FnRoomController {
     @FXML
-    private TextField textEX;
+    private Label taskText;
 
     @FXML
     private Button acceptButton;
@@ -20,12 +20,13 @@ public class FnRoomController {
     @FXML
     void completeTask(ActionEvent event) throws IOException {
         FnRoom.completeCurrentTask();
+        taskText.setText("Well done! You have completed the task. Feel free to accept the next one!"); // This is where we would put facts
         update();
     }
     @FXML
     void acceptTask(ActionEvent event) throws IOException {
         FnRoom.giveTask();
-        textEX.setText(FnRoom.currentTask.getDescription());
+        taskText.setText(FnRoom.currentTask.getDescription());
         update();
     }
 

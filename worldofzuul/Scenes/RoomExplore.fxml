@@ -36,5 +36,6 @@
                 <Button onAction="#search" styleClass="button" text="Explore"/>
             </children>
         </FlowPane>
+        <fx:include fx:id="popup" source="Components/Popup.fxml" AnchorPane.rightAnchor="400" AnchorPane.leftAnchor="400" AnchorPane.topAnchor="300" />
     </children>
 </AnchorPane>

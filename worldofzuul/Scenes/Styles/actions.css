@@ -23,3 +23,9 @@
     -fx-text-alignment: center;
     -fx-alignment: center;
 }
+
+.task-field {
+    -fx-background-color: rgba(245, 245, 245, 0.8);
+    -fx-background-radius: 4px;
+    -fx-font-size: 16;
+}

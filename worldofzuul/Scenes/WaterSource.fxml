@@ -9,7 +9,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="worldofzuul.Controllers.WaterSourceController" stylesheets="@Styles/actions.css">
     <children>
-        <ImageView fx:id="WaterSourceImage" fitWidth="1600.0" preserveRatio="true" pickOnBounds="true">
+        <ImageView fitWidth="1600.0" preserveRatio="true" pickOnBounds="true">
             <image>
                 <Image url="@../Assets/WaterSource.jpg"/>
             </image>
@@ -36,5 +36,6 @@
                 <Button onAction="#fillWater" styleClass="button" text="Fill"/>
             </children>
         </FlowPane>
+        <fx:include fx:id="popup" source="Components/Popup.fxml" AnchorPane.rightAnchor="400" AnchorPane.leftAnchor="400" AnchorPane.topAnchor="300" />
     </children>
 </AnchorPane>
