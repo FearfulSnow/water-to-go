@@ -1,13 +1,17 @@
 package worldofzuul;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
   private static Inventory inventory_instance = null;
   private static int water;
-  private static int maxWater = 100;
+  private static final int maxWater = 100;
   private static List<Item> items = new ArrayList<>();
+
+  private static final PropertyChangeSupport support = new PropertyChangeSupport(Inventory.class);
 
   private Inventory(int _water) {
     water = _water;
@@ -20,12 +24,18 @@ public class Inventory {
     return inventory_instance;
   }
 
+  public static void addPropertyChangeListener(PropertyChangeListener pcl) {
+    support.addPropertyChangeListener(pcl);
+  }
+
   public static int getWater() {
     return water;
   }
 
   public static void setWater(int _water) {
+    int oldValue = water;
     water = _water;
+    support.firePropertyChange("water", oldValue, water);
     if (water > maxWater) water = maxWater;
     if (water < 0) water = 0;
     System.out.printf("You have %d water remaining.\n", Inventory.getWater());
@@ -33,10 +43,6 @@ public class Inventory {
 
   public static int getMaxWater() {
     return maxWater;
-  }
-
-  public void setMaxWater(int _maxWater) {
-    maxWater = _maxWater;
   }
 
   public static Item getItem(String name) {
@@ -107,9 +113,5 @@ public class Inventory {
       items.remove(getItem(name));
     }
     System.out.printf("Removed %dx %s from inventory.\n", quantity, name);
-  }
-
-  public static void setItems(List<Item> _items) {
-    items = _items;
   }
 }
