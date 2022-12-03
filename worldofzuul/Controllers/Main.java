@@ -1,4 +1,5 @@
 package worldofzuul.Controllers;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +18,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Game.getInstance(); //creates rooms, taskList, inventory
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("worldofzuul/Scenes/Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("worldofzuul/Scenes/Home.fxml"));
+        Parent root = loader.load();
+        HomeController homeController = loader.getController();
+        homeController.showIntro(true);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);

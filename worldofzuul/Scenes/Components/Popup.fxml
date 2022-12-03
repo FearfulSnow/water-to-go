@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:id="popup" styleClass="action-pane" stylesheets="@../Styles/actions.css" vgap="16" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.Controllers.Popup">
+    <children>
+        <Label fx:id="popupText" alignment="CENTER" contentDisplay="CENTER" maxWidth="750.0" text="You win!" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        <Button fx:id="popupButton" alignment="CENTER" onAction="#closePopup" styleClass="button" text="Close" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+    </children>
+    <padding>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+    </padding>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+   </rowConstraints>
+</GridPane>

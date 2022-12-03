@@ -5,7 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import worldofzuul.FnRoom;
 
-public class TaskBarController {
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class TaskBarController implements PropertyChangeListener {
     @FXML
     private Label taskCompletionLabel;
     @FXML
@@ -16,13 +19,20 @@ public class TaskBarController {
 
     @FXML
     public void initialize() {
+        FnRoom.addPropertyChangeListener(this);
         update();
     }
 
     @FXML
     private void update() {
-        currentProgress = ((double) FnRoom.getTaskArrayList().stream().filter(task -> task.isCompleted).count());
+        long completedTasks = FnRoom.getTaskArrayList().stream().filter(task -> task.isCompleted).count();
+        currentProgress = ((double) completedTasks) / FnRoom.getTaskArrayList().size();
         taskBar.setProgress(currentProgress);
-        taskCompletionLabel.setText(((int) currentProgress) + "/" + FnRoom.getTaskArrayList().size());
+        taskCompletionLabel.setText(((int) completedTasks) + "/" + FnRoom.getTaskArrayList().size());
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        update();
     }
 }

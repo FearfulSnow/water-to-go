@@ -19,17 +19,16 @@ public class Task {
         this.reward = reward;
     }
 
-    public boolean completeTask() {
+    public void completeTask() {
         if (!isRequirementsMet()) {
             System.out.println("Requirements not met.");
-            return false;
+            return;
         }
         System.out.println("Requirements met!");
         Inventory.removeItem(requirement);
         Inventory.addItem(reward);
         System.out.println("Well done! You have completed the task. Feel free to accept the next one!");
         isCompleted = true;
-        return true;
     }
 
 
@@ -44,10 +43,6 @@ public class Task {
 
     public Item getRequirement() {
         return requirement;
-    }
-
-    public Item getReward() {
-        return reward;
     }
 
     @Override

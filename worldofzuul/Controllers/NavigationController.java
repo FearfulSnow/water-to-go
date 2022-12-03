@@ -3,12 +3,8 @@ package worldofzuul.Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.Stage;
 import worldofzuul.Game;
 import worldofzuul.RoomName;
 
@@ -58,6 +54,7 @@ public class NavigationController {
 
     @FXML
     void goWaterSource(ActionEvent event) throws IOException {
+
         Game.getInstance().goToRoom(RoomName.WATER);
         navigationPane.getScene().setRoot(FXMLLoader.load(getClass().getClassLoader().getResource("worldofzuul/Scenes/WaterSource.fxml")));
     }

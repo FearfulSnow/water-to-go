@@ -9,12 +9,11 @@ import java.io.IOException;
 
 public class WaterSourceController {
     @FXML
-    private TextField textEX;
+    private TextField waterTextBox;
 
     @FXML
     void fillWater(ActionEvent event) throws IOException {
-        textEX.setText("You fill your water bottle.");
+        waterTextBox.setText("You fill your water bottle.");
         Inventory.setWater(100);
     }
-
 }

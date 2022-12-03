@@ -1,5 +1,7 @@
 package worldofzuul;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 
 public class RoomExplore extends Room {
@@ -12,8 +14,14 @@ public class RoomExplore extends Room {
         add(new Item("nothing", 0));
     }};
 
+    private static final PropertyChangeSupport support = new PropertyChangeSupport(RoomExplore.class);
+
     public RoomExplore(String name, String description, int waterCost) {
         super(name, description, waterCost);
+    }
+
+    public static void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
     }
 
     public static void collectItem() {
@@ -22,6 +30,7 @@ public class RoomExplore extends Room {
         int sizeOfItemList = itemList.size();
 
         Item itemToReturn = itemList.get(getRandomItemNumber(0, sizeOfItemList));
+        support.firePropertyChange("foundItem", null, itemToReturn);
 
         if (itemToReturn.getName().equals("nothing")) {
             System.out.println("You found nothing");
