@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:id="popup" styleClass="action-pane" stylesheets="@../Styles/actions.css" vgap="16" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.Controllers.Popup">
+<GridPane fx:id="popup" styleClass="action-pane" stylesheets="@../Styles/actions.css" vgap="16" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.Controllers.PopupController">
     <children>
-        <Label fx:id="popupText" alignment="CENTER" contentDisplay="CENTER" maxWidth="750.0" text="You win!" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
+        <Label fx:id="popupText" alignment="CENTER" contentDisplay="CENTER" maxWidth="750.0" text="Congratulations you have built a new well!“ With funds from generous donors, we have been able to make repairs to existing wells in various small villages. This will help educational systems and Togo's health…”-UN" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>

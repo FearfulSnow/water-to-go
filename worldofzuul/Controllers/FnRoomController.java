@@ -36,7 +36,7 @@ public class FnRoomController {
     }
 
     private void update() {
-        acceptButton.setDisable(FnRoom.currentTask != null);
+        acceptButton.setDisable(FnRoom.currentTask != null && !FnRoom.isAllTasksDone());
         completeButton.setDisable(FnRoom.currentTask == null);
         if (FnRoom.currentTask != null) completeButton.setDisable(!FnRoom.currentTask.isRequirementsMet());
     }

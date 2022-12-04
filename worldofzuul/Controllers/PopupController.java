@@ -11,7 +11,7 @@ import worldofzuul.Inventory;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class Popup implements PropertyChangeListener {
+public class PopupController implements PropertyChangeListener {
     @FXML
     private Label popupText;
     @FXML
@@ -46,7 +46,7 @@ public class Popup implements PropertyChangeListener {
     }
 
     private void youWin() {
-        setPopupText("Congratulations, you have beaten the game!");
+        setPopupText("Congratulations you have built a new well!\n“With funds from generous donors, we have been able to make repairs to existing wells in various small villages. This will help educational systems and Togo's health…” - UN");
         popupButton.setText("Exit game");
         popupButton.setOnAction(actionEvent -> System.exit(0));
         popup.setVisible(true);
