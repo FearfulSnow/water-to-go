@@ -7,10 +7,11 @@ import java.util.*;
 public class RoomExplore extends Room {
     // Arraylist made for items.
     private static ArrayList<Item> itemList = new ArrayList<>() {{
-        add(new Item("salt water battery", 1));
-        add(new Item("plastic", 1));
-        add(new Item("filter", 1));
-        add(new Item("metal scrap", 1));
+        add(new Item("Metal Scrap", 1));
+        add(new Item("Plastic", 1));
+        add(new Item("Filter", 1));
+        add(new Item("Bag of gravel", 1));
+        add(new Item("Bag of sand", 1));
         add(new Item("nothing", 0));
     }};
 

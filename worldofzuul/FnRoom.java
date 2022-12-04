@@ -30,9 +30,42 @@ public class FnRoom extends Room {
 
     private void createTasks() {
         setTaskArrayList(new ArrayList<>() {{
-            add(new Task(0, "Welcome to the UN. \nOur main goal is to install pipes from the village to the water source to reduce the time spent on water collection.\nYour first task is to collect 2 saltwater batteries and return it back to us.\nYour reward will be a pipe that you can use to install the pipeline to reduce the distance for villagers to obtain water.", new Item("salt water battery", 2), new Item("pipe", 1)));
-            add(new Task(1, "In this task, you need to obtain 3 metal scraps.\nYour reward will be a pipe that you can use to install the pipeline to reduce the distance for villagers to obtain water.", new Item("metal scrap", 3), new Item("pipe", 1)));
-            add(new Task(2, "In this task, you need to obtain 6 filters and return them back to us.", new Item("filter", 6), new Item("pipe", 1)));
+            add(new Task(0, """
+                Welcome to Togo a small but densely populated country in Western Africa!
+                The southern part of the country is a low coastal plain with extensive lagoons and marshes with lots of water, but here in the north there is only the savanna – dry and arid.
+                The villagers must travel far to find water so we will create a new well closer to the village.
+                First we must get some drill equipment. Bring us some metal and we will turn it into a drill.
+                """, new Item("Metal Scrap", 3), new Item("Drill", 1)));
+            add(new Task(1, """
+                Now that we have a drill we will start digging.
+                Did you know that more than 60% of Togo's population lives below the poverty line, and many people lack reliable access to drinking water, education, health and electricity.
+                Next up we need to get this well filled with pipes for transport.
+                See if you can find some plastic, that we can turn into PVC pipes.
+                """, new Item("Plastic", 3), new Item("PVC pipe", 1)));
+            add(new Task(2, """
+                These pipes will go into the drilled hole, but first we need to prepare some filters.
+                Did you know that 67% of the country’s land is considered Agricultural, with Togo’s main exports being Cocoa Beans, Coffee, and Peanuts.
+                Filters are needed to prevent different contaminants from affecting the water.
+                See if you can find some filters.
+                """, new Item("Filter", 3), new Item("Filtered pipe", 1)));
+            add(new Task(3, """
+                With filters in place, we can install the pipes into the hole.
+                To make sure it is stable we need to fill gravel around the pipe.
+                You can find gravel out in the wilderness.
+                """, new Item("Bag of gravel", 3), new Item("Gravel", 1)));
+            add(new Task(4, """
+                The pipe has been installed in the hole, now we need to make a sanitary seal.
+                This is made with concrete and encapsulates the top couple of meters of the pipe.
+                More than 60% of Togo’s population lives below the poverty line so we need to mix our own cement using powder and sand.
+                See if you can find some sand.
+                """, new Item("Bag of sand", 3), new Item("Concrete", 1)));
+            add(new Task(5, """
+                Finally, we are almost done.
+                We only need to add a hand pump to the well and the villagers can have easy access to clean water.
+                Current estimates are that 55% of rural communities in Togo do not have access to an improved water source.
+                There is a long way to go to raise that number to 100%, but with funds from the general public we are able to build wells in other villages like this.
+                Find some metal scraps and we can turn that into a pump.
+                """, new Item("Metal Scrap", 3), new Item("Hand Pump", 1)));
         }});
     }
 
@@ -57,9 +90,9 @@ public class FnRoom extends Room {
         support.firePropertyChange("currentTask", null, currentTask);
     }
 
-    public static boolean isAllTasksDone(){
-        for (Task task: taskArrayList) {
-            if (!task.isCompleted){
+    public static boolean isAllTasksDone() {
+        for (Task task : taskArrayList) {
+            if (!task.isCompleted) {
                 return false;
             }
         }
