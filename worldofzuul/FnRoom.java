@@ -38,8 +38,8 @@ public class FnRoom extends Room {
                 """, new Item("Metal Scrap", 3), new Item("Drill", 1)));
             add(new Task(1, """
                 Now that we have a drill we will start digging.
-                Did you know that more than 60 % of Togo's population lives below the poverty line, and many people lack reliable access to drinking water, education, health and electricity.
-                Next up we need get this well filled with pipes for transport.
+                Did you know that more than 60% of Togo's population lives below the poverty line, and many people lack reliable access to drinking water, education, health and electricity.
+                Next up we need to get this well filled with pipes for transport.
                 See if you can find some plastic, that we can turn into PVC pipes.
                 """, new Item("Plastic", 3), new Item("PVC pipe", 1)));
             add(new Task(2, """
