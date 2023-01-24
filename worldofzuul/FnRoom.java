@@ -41,24 +41,24 @@ public class FnRoom extends Room {
                 Did you know that more than 60% of Togo's population lives below the poverty line, and many people lack reliable access to drinking water, education, health and electricity.
                 Next up we need to get this well filled with pipes for transport.
                 See if you can find some plastic, that we can turn into PVC pipes.
-                """, new Item("Plastic", 3), new Item("PVC pipe", 1)));
+                """, new Item("Metal Scrap", 3), new Item("PVC pipe", 1)));
             add(new Task(2, """
                 These pipes will go into the drilled hole, but first we need to prepare some filters.
                 Did you know that 67% of the country’s land is considered Agricultural, with Togo’s main exports being Cocoa Beans, Coffee, and Peanuts.
                 Filters are needed to prevent different contaminants from affecting the water.
                 See if you can find some filters.
-                """, new Item("Filter", 3), new Item("Filtered pipe", 1)));
+                """, new Item("Metal Scrap", 3), new Item("Filtered pipe", 1)));
             add(new Task(3, """
                 With filters in place, we can install the pipes into the hole.
                 To make sure it is stable we need to fill gravel around the pipe.
                 You can find gravel out in the wilderness.
-                """, new Item("Bag of gravel", 3), new Item("Gravel", 1)));
+                """, new Item("Metal Scrap", 3), new Item("Gravel", 1)));
             add(new Task(4, """
                 The pipe has been installed in the hole, now we need to make a sanitary seal.
                 This is made with concrete and encapsulates the top couple of meters of the pipe.
                 More than 60% of Togo’s population lives below the poverty line so we need to mix our own cement using powder and sand.
                 See if you can find some sand.
-                """, new Item("Bag of sand", 3), new Item("Concrete", 1)));
+                """, new Item("Metal Scrap", 3), new Item("Concrete", 1)));
             add(new Task(5, """
                 Finally, we are almost done.
                 We only need to add a hand pump to the well and the villagers can have easy access to clean water.
